@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    continue-on-error: true
+
+    url: jdbc:mysql://localhost:3306/hathi?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: bodrikutya
+    hikari:
+      minimum-idle: 0
+      maximum-pool-size: 3
+      initialization-fail-timeout: -1
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: create
+    show-sql: true
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+  http:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1

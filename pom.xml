@@ -10,10 +10,10 @@
   </parent>
 
   <groupId>hu.boga.webshop</groupId>
-  <artifactId>parent</artifactId>
+  <artifactId>webshop-parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>parent</name>
+  <name>webshop-parent</name>
   <description>Parent of the webshop modules</description>
 
   <modules>

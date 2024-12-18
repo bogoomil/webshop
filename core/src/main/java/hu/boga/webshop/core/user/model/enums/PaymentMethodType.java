@@ -1,4 +1,4 @@
-package hu.boga.webshop.persistence.enums;
+package hu.boga.webshop.core.user.model.enums;
 
 import lombok.Getter;
 
@@ -10,7 +10,7 @@ public enum PaymentMethodType {
     PM_KH_SZEPCARD_ONLINE("K&H szépkártya"),
     PM_MKB_SZEPCARD_ONLINE("MKB szépkártya");
 
-    private String megnevezes;
+    private final String megnevezes;
 
     PaymentMethodType(String megnevezes) {
         this.megnevezes = megnevezes;

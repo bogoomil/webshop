@@ -10,27 +10,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
-import java.util.Collection;
 import lombok.Data;
 
 /**
- *
  * @author user
  */
 @Entity
-@Table(name = "role")
+@Table(name = "image")
 @Data
-public class Role {
-    @Column(name = "name")
-    private String name;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
-    private Long id;
+public class ImageEntity {
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<UserEntity> userEntities;
+  @Column
+  private String fileName;
+
+  @Id
+  @Column(name = "id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @Lob
+  @Column(name = "image", nullable = false, length = 100000)
+  private byte[] image;
+
 
 }

@@ -10,7 +10,6 @@
     <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
   </parent>
 
-  <groupId>hu.boga.webshop</groupId>
   <artifactId>persistence</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>persistence</name>
@@ -39,6 +38,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.40</version>
     </dependency>
   </dependencies>
 

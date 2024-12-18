@@ -22,7 +22,6 @@ import java.util.Collection;
 import lombok.Data;
 
 /**
- *
  * @author user
  */
 @Entity
@@ -30,53 +29,53 @@ import lombok.Data;
 @Data
 public class UserEntity {
 
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
-    private Collection<Address> addresses = new ArrayList<>();
+  @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
+  private Collection<AddressEntity> addressEntities = new ArrayList<>();
 
-    @Column(name = "email")
-    private String email;
+  @Column(name = "email")
+  private String email;
 
-    @Column(name = "firstName")
-    private String firstName;
+  @Column(name = "firstName")
+  private String firstName;
 
-    @Column(name = "lastName")
-    private String lastName;
+  @Column(name = "lastName")
+  private String lastName;
 
-    @Column(name = "loginName")
-    private String loginName;
+  @Column(name = "loginName")
+  private String loginName;
 
-    @Column(name = "password")
-    private String password;
+  @Column(name = "password")
+  private String password;
 
-    @Column(name = "phone1")
-    private String phone1;
+  @Column(name = "phone1")
+  private String phone1;
 
-    @Column(name = "phone1Extension")
-    private String phone1Extension;
+  @Column(name = "phone1Extension")
+  private String phone1Extension;
 
-    @Column(name = "phone2")
-    private String phone2;
+  @Column(name = "phone2")
+  private String phone2;
 
-    @Column(name = "phone2Extension")
-    private String phone2Extension;
+  @Column(name = "phone2Extension")
+  private String phone2Extension;
 
-    @Column(name = "preferredLocale")
-    private String preferredLocale;
+  @Column(name = "preferredLocale")
+  private String preferredLocale;
 
-    @Column
-    private String jelszoHelyreallitoKod;
+  @Column
+  private String jelszoHelyreallitoKod;
 
-    @Column
-    private LocalDateTime jelszoHelyreallitasDatum;
+  @Column
+  private LocalDateTime jelszoHelyreallitasDatum;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
-    private Collection<Role> roles = new ArrayList<>(0);
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
+  private Collection<RoleEntity> roles = new ArrayList<>(0);
 
-    @Id
-    @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @Column(name = "user_id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
 
 }

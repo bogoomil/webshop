@@ -1,4 +1,4 @@
-package hu.boga.webshop.persistence.enums;
+package hu.boga.webshop.core.user.model.enums;
 
 import lombok.Getter;
 
@@ -8,9 +8,9 @@ public enum ShopStatus  {
     CLOSED("Zárva"),
     TEMPORARILY_CLOSED("Ideiglenesen zárva");
 
-    private String megnevezes;
+    private final String megnevezes;
 
-    private ShopStatus(String megnevezes) {
+    ShopStatus(String megnevezes) {
         this.megnevezes = megnevezes;
     }
 

@@ -15,9 +15,6 @@ public class UserGatewayImpl implements UserGateway {
   @Override
   public List<User> getAllUsers() {
     List<UserEntity> entities = userRepository.findAll();
-    return List.of(User.builder()
-            .username("zergeszar")
-            .password("pinazsir")
-        .build());
+    return List.of(new User());
   }
 }

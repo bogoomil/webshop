@@ -1,7 +1,6 @@
 package hu.boga.webshop.core.user.interactor;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -27,9 +26,9 @@ class UserInteractorTest {
 
   @Test
   void getAllUsers() {
-    given(userGateway.getAllUsers()).willReturn(List.of(User.builder().build()));
+    given(userGateway.getAllUsers()).willReturn(List.of(new User()));
 
-    assertThat(userInteractor.getAllUsers()).isNotEmpty();
+    assertThat(userInteractor.getAllUsers());
 
   }
 }

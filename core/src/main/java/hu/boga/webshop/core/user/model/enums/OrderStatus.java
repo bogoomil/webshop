@@ -1,4 +1,4 @@
-package hu.boga.webshop.persistence.enums;
+package hu.boga.webshop.core.user.model.enums;
 
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ public enum OrderStatus {
     OS_NEW("Új"),
     OS_SENT("Elküldve");
 
-    private String megnevezés;
+    private final String megnevezés;
 
     OrderStatus(String megnevezes) {
         this.megnevezés = megnevezes;

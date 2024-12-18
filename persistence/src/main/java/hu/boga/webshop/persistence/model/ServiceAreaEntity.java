@@ -13,26 +13,27 @@ import lombok.Data;
 @Entity
 @Table(name = "servicearea")
 @Data
-public class ServiceArea {
-    @Column
-    private String city;
+public class ServiceAreaEntity {
 
-    @Column
-    private String country;
+  @Column
+  private String city;
 
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Column
+  private String country;
 
-    @ManyToOne
-    @JoinColumn(name = "shop_id")
-    private Shop shop;
+  @Id
+  @Column(name = "id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column
-    private int transitCost;
+  @ManyToOne
+  @JoinColumn(name = "shop_id")
+  private ShopEntity shop;
 
-    @Column
-    private String zip;
+  @Column
+  private int transitCost;
+
+  @Column
+  private String zip;
 
 }

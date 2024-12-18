@@ -22,29 +22,29 @@ import lombok.Data;
 
 
 /**
- *
  * @author user
  */
 @Entity
 @Table(name = "kategoria")
 @Data
-public class Kategoria {
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
-    private List<Kategoria> children = new ArrayList<>();
+public class KategoriaEntity {
 
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
+  private List<KategoriaEntity> children = new ArrayList<>();
 
-    @Column(name = "megnevezes", nullable = false)
-    private String megnevezes;
+  @Id
+  @Column(name = "id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "parentId")
-    private Kategoria parent;
+  @Column(name = "megnevezes", nullable = false)
+  private String megnevezes;
 
-    @OneToMany(mappedBy = "kategoria", cascade = CascadeType.REMOVE)
-    private Collection<Tetel> tetelek;
+  @ManyToOne
+  @JoinColumn(name = "parentId")
+  private KategoriaEntity parent;
+
+  @OneToMany(mappedBy = "kategoria", cascade = CascadeType.REMOVE)
+  private Collection<TetelEntity> tetelek;
 
 }

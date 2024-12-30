@@ -26,7 +26,7 @@ class UserInteractorTest {
 
   @Test
   void getAllUsers() {
-    given(userGateway.getAllUsers()).willReturn(List.of(new User()));
+    given(userGateway.getAllUsers()).willReturn(List.of(User.builder().build()));
 
     assertThat(userInteractor.getAllUsers());
 

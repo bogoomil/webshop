@@ -6,12 +6,14 @@
 package hu.boga.webshop.core.user.model;
 
 import hu.boga.webshop.core.user.model.enums.AddressType;
+import lombok.Builder;
 import lombok.Data;
 
 /**
  * @author user
  */
 @Data
+@Builder
 public class Address {
 
   private String addressName;
@@ -31,8 +33,6 @@ public class Address {
   private String street2;
 
   private AddressType type;
-
-  private User userEntity;
 
   private String zip;
 

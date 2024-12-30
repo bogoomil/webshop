@@ -16,7 +16,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import lombok.Data;
@@ -41,9 +40,6 @@ public class UserEntity {
   @Column(name = "lastName")
   private String lastName;
 
-  @Column(name = "loginName")
-  private String loginName;
-
   @Column(name = "password")
   private String password;
 
@@ -59,16 +55,7 @@ public class UserEntity {
   @Column(name = "phone2Extension")
   private String phone2Extension;
 
-  @Column(name = "preferredLocale")
-  private String preferredLocale;
-
-  @Column
-  private String jelszoHelyreallitoKod;
-
-  @Column
-  private LocalDateTime jelszoHelyreallitasDatum;
-
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
   private Collection<RoleEntity> roles = new ArrayList<>(0);
 

@@ -10,13 +10,14 @@ import {MyaccountComponent} from './myaccount/myaccount.component';
 import {AllergenComponent} from './allergen/allergen.component';
 
 export const routes: Routes = [
-{ path: 'admin-component', component: AdminComponent },
-{ path: 'menu-component', component: MenuComponent },
-{ path: 'home-component', component: HomeComponent },
-{ path: 'conditions-component', component: ConditionsComponent },
-{ path: 'contact-component', component: ContactComponent },
-{ path: 'privacy-component', component: PrivacyComponent },
-{ path: 'shoppingcart-component', component: ShoppingcartComponent },
-{ path: 'myaccount-component', component: MyaccountComponent },
-{ path: 'allergen-component', component: AllergenComponent },
+{ path: '', redirectTo: '/home', pathMatch: 'full' },
+{ path: 'admin', component: AdminComponent },
+{ path: 'menu', component: MenuComponent },
+{ path: 'home', component: HomeComponent },
+{ path: 'conditions', component: ConditionsComponent },
+{ path: 'contact', component: ContactComponent },
+{ path: 'privacy', component: PrivacyComponent },
+{ path: 'shoppingcart', component: ShoppingcartComponent },
+{ path: 'myaccount', component: MyaccountComponent },
+{ path: 'allergen', component: AllergenComponent },
 ];

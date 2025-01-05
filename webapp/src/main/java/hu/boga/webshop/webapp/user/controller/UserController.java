@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -67,10 +68,9 @@ public class UserController {
             .build());
   }
 
-  @GetMapping("/userlist")
+  @GetMapping("/private/userlist")
   @PreAuthorize("hasAnyRole('ROLE_USER')")
   public List<String> userList() {
     return userInteractor.getAllUsers().stream().map(User::getEmail).toList();
   }
-
 }

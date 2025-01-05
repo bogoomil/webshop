@@ -1,34 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { increment, decrement, reset } from '../../store/counter.actions';
-
+import ApiService from '../../services/api.service';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import AuthService from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent {
-  count$: Observable<number>;
+export class LoginComponent implements OnInit{
+  loggedIn$: Observable<boolean>;
+  username: string = 'balazs.kun@gmail.com';
+  password: string = 'z3rg3H3r3';
+  hide = signal(true);
 
-  constructor(private store: Store<{ count: number }>) {
-    this.count$ = store.select('count');
+  constructor(private store: Store<{ loggedIn: boolean }>, private api: ApiService, private authservice: AuthService) {
+    this.loggedIn$ = store.select('loggedIn');
   }
 
-  increment() {
-    this.store.dispatch(increment());
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 
-  decrement() {
-    this.store.dispatch(decrement());
+  ngOnInit(): void {
+    console.log('INITIALIZING LOGIN COMPONENT');
   }
 
-  reset() {
-    console.log('zergegenny');
-    this.store.dispatch(reset());
+  login(){
+    console.log('user:' + this.username + ", pass: " + this.password);
+    this.api.authenticate(this.username, this.password).subscribe(response => {
+      this.authservice.login(response.jwttoken);
+    });
   }
+
+  logout(){
+    this.authservice.logout();
+  }
+
 }

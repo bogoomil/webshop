@@ -6,6 +6,7 @@ import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -16,9 +17,12 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -33,10 +37,11 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
         .csrf(AbstractHttpConfigurer::disable)
-        .cors((httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource())))
+//        .cors((httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource())))
         .authorizeHttpRequests((authz) -> authz
             .requestMatchers("/js/**", "/fonts/**", "/img/**", "/css/**", "/", "/favicon.jpeg", "/api/public/**", "/error")
             .permitAll()
+            .requestMatchers(HttpMethod.OPTIONS).permitAll()
             .anyRequest().authenticated()
         ).exceptionHandling((exceptionHandlingConfigurer) -> exceptionHandlingConfigurer
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)
@@ -52,20 +57,17 @@ public class SecurityConfig {
     return authenticationConfiguration.getAuthenticationManager();
   }
 
-  CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("*"));
-    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE"));
-    configuration.setAllowedHeaders(Arrays.asList("content-type",
-        "x-requested-with",
-        "authorization",
-        "x-auth-token",
-        "x-csrf-token",
-        "x-xsrf-token"));
-    configuration.setMaxAge(3600L);
-    configuration.setAllowCredentials(true);
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", configuration);
-    return source;
+  @Bean
+  public WebMvcConfigurer corsConfigurer() {
+    return new WebMvcConfigurer() {
+      @Override
+      public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedHeaders("*")
+            .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
+            .allowedOrigins("http://172.17.0.3:4200")
+            .allowCredentials(true);
+      }
+    };
   }
 }

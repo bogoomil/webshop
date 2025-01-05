@@ -1,7 +1,18 @@
-<button (click)="increment()">Increment</button>
-
-<div>Current Count: {{ count$ | async }}</div>
-
-<button (click)="decrement()">Decrement</button>
-
-<button (click)="reset()">Reset Counter</button>
+<div *ngIf="loggedIn$ | async">
+    <button mat-flat-button (click)="logout()">Logout</button>
+</div>
+<div *ngIf="!(loggedIn$ | async)">
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input [(ngModel)]="username" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input [(ngModel)]="password" matInput [type]="hide() ? 'password' : 'text'" />
+        <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()">
+            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <button mat-flat-button (click)="login()">Login</button>
+</div>

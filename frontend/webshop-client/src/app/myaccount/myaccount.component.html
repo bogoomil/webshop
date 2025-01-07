@@ -1,1 +1,15 @@
-<app-login></app-login>
+<div *ngIf="loggedIn$ | async">
+    <button mat-flat-button (click)="logout()">Logout</button>
+</div>
+<div *ngIf="!(loggedIn$ | async)">
+    <mat-tab-group>
+        <mat-tab label="Belépés">
+            <app-login></app-login>
+        </mat-tab>
+        <mat-tab label="Regisztráció">
+            <app-signup></app-signup>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+

@@ -1,23 +1,28 @@
-import { Component, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { RouterLink } from '@angular/router';
-import { RouterLinkActive } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { login } from './myaccount/store/authstore.actions';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatMenuModule } from '@angular/material/menu';
-import {CommonModule} from '@angular/common';
-import {MatTabsModule} from '@angular/material/tabs';
 
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive,MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatMenuModule, MatTabsModule],
+  imports: [RouterOutlet, MatTabsModule, MatIconModule, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Hathi';
   activeLink = '';
+
+  constructor(private store: Store){}
+
+  ngOnInit(): void {
+    console.log('INIT APP COMPONENT');
+    let jwtToken = sessionStorage.getItem('jwtToken');
+    if (jwtToken) {
+      this.store.dispatch(login());
+    }
+  }
 }

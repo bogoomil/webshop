@@ -1,0 +1,48 @@
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a mat-tab-link (click)="activeLink = '/home'"
+     [active]="activeLink == '/home'" routerLink="/home" routerLinkActive="active" >
+    <mat-icon>home</mat-icon>
+    Home
+  </a>
+  <a mat-tab-link (click)="activeLink = '/menu'"
+     [active]="activeLink == '/menu'" routerLink="/menu">
+    Étlap
+  </a>
+
+  <a mat-tab-link (click)="activeLink = '/contact'"
+     [active]="activeLink == '/contact'" routerLink="/contact">
+    Elérhetőség
+  </a>
+
+  <a mat-tab-link (click)="activeLink = '/conditions'"
+     [active]="activeLink == '/conditions'" routerLink="/conditions">
+    Feltételek
+  </a>
+
+  <a mat-tab-link (click)="activeLink = '/privacy'"
+     [active]="activeLink == '/privacy'" routerLink="/privacy" >
+    Adatvédelem
+  </a>
+
+  <a mat-tab-link (click)="activeLink = '/allergen'"
+     [active]="activeLink == '/allergen'" routerLink="/allergen" >
+    Allergén info
+  </a>
+
+  <a mat-tab-link (click)="activeLink = '/shoppingcart'"
+     [active]="activeLink == '/shoppingcart'" routerLink="/shoppingcart" >
+    <mat-icon>shopping_cart</mat-icon>
+  </a>
+
+  <a mat-tab-link (click)="activeLink = '/myaccount'"
+     [active]="activeLink == '/myaccount'" routerLink="/myaccount" >
+    <mat-icon>person</mat-icon>
+  </a>
+
+  <a mat-tab-link (click)="activeLink = '/admin'"
+     [active]="activeLink == '/admin'" routerLink="/admin" >
+    Admin
+  </a>
+
+</nav>
+<mat-tab-nav-panel #tabPanel><router-outlet /></mat-tab-nav-panel>

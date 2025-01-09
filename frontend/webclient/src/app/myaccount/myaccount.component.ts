@@ -13,7 +13,8 @@ import BaseComponent from '../shared/base.component';
   selector: 'app-myaccount',
   imports: [LoginComponent, CommonModule, MatTabsModule, MatButtonModule, SignupComponent],
   templateUrl: './myaccount.component.html',
-  styleUrl: './myaccount.component.css'
+  styleUrl: './myaccount.component.css',
+  standalone: true
 })
 export class MyaccountComponent extends BaseComponent{
   constructor(

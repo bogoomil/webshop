@@ -1,5 +1,8 @@
-import { Component, signal } from '@angular/core';
-import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, OnInit, signal} from '@angular/core';
+import {FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AddressForm, User, UserForm } from '../../models/auth.interface';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { merge } from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -7,40 +10,38 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
+
 @Component({
   selector: 'app-signup',
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatIconModule, MatButtonModule],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrls: ['./signup.component.scss'],
+  standalone: true,
+  imports: [FormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule]
 })
 export class SignupComponent {
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
-  readonly password = new FormControl('', [Validators.required, Validators.minLength(8)]);
-
-  errorMessage = signal('');
   hide = signal(true);
-
-  constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage());
-  }
-
-  updateErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.errorMessage.set('You must enter a value');
-    } else if (this.email.hasError('email')) {
-      this.errorMessage.set('Not a valid email');
-    } else {
-      this.errorMessage.set('');
+  user: User = new User();
+  registerForm = new FormGroup<UserForm>({
+    lastName: new FormControl('', [Validators.required, Validators.email]),
+    firstName: new FormControl(''),
+    username: new FormControl(''),
+    email: new FormControl(''),
+    password: new FormControl(''),
+    shippingAddress: new FormGroup<AddressForm>({
+      addressName: new FormControl(''),
+      city: new FormControl('', Validators.required)
     }
-  }
+    )
+  });
 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
 
+  submit(){
+    console.log('user: ' + JSON.stringify(this.registerForm.getRawValue()));
+  }
+
 
 }
-

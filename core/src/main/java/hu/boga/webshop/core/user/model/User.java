@@ -18,6 +18,8 @@ public class User {
 
   private Collection<Address> addresses = new ArrayList<>();
 
+  private String username;
+
   private String email;
 
   private String firstName;

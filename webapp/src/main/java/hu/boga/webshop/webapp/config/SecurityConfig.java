@@ -65,7 +65,7 @@ public class SecurityConfig {
         registry.addMapping("/**")
             .allowedHeaders("*")
             .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
-            .allowedOrigins("http://172.17.0.3:4200")
+            .allowedOrigins("http://localhost:4200")
             .allowCredentials(true);
       }
     };

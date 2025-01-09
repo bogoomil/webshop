@@ -15,6 +15,8 @@ public class SignupForm {
 
   private String email;
 
+  private String username;
+
   private String firstName;
 
   private String lastName;
@@ -29,40 +31,8 @@ public class SignupForm {
 
   private String phone2Extension;
 
-  private String addressNameBilling;
+  private Address shippingAddress;
 
-  private String cityBilling;
-
-  private String countryBilling;
-
-  private String doorBilling;
-
-  private String floorBilling;
-
-  private String numberBilling;
-
-  private String streetBilling;
-
-  private String street2Billing;
-
-  private String zipBilling;
-
-  private String cityShipping;
-
-  private String countryShipping;
-
-  private String doorShipping;
-
-  private String floorShipping;
-
-  private String numberShipping;
-
-  private String streetShipping;
-
-  private String street2Shipping;
-
-  private AddressType typeShipping;
-
-  private String zipShipping;
+  private Address billingAddress;
 
 }

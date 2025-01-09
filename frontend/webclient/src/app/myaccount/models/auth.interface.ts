@@ -48,22 +48,22 @@ export interface UserForm {
     firstName: FormControl;
     lastName: FormControl;  
     password: FormControl;
-    // phone1: FormControl;
-    // phone1Extension: FormControl;
+    phone1: FormControl;
+    phone1Extension: FormControl;
     // phone2: FormControl;  
     // phone2Extension: FormControl;
     shippingAddress: FormGroup<AddressForm>;
-    // billingAddress: AddressForm;
+    billingAddress: FormGroup<AddressForm>;
 }
 
 export interface AddressForm {
     addressName: FormControl;
     city: FormControl;
-    // country: FormControl;
-    // door: FormControl;
-    // floor: FormControl;
-    // number: FormControl;
-    // street: FormControl;
-    // street2: FormControl;
-    // zip: FormControl;
+    country: FormControl;
+    door: FormControl;
+    floor: FormControl;
+    number: FormControl;
+    street: FormControl;
+    street2: FormControl;
+    zip: FormControl;
 }

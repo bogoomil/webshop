@@ -39,7 +39,7 @@
     <mat-icon>person</mat-icon>
   </a>
 
-  <a mat-tab-link (click)="activeLink = '/admin'"
+  <a  *ngIf="(loggedIn$ | async) && this.hasRole('ROLE_ADMIN')" mat-tab-link (click)="activeLink = '/admin'"
      [active]="activeLink == '/admin'" routerLink="/admin" >
     Admin
   </a>

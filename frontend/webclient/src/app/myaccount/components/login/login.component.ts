@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, signal } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import ApiService from '../services/api.service';
+import ApiService from '../../services/api.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 
 import { FormsModule } from '@angular/forms';
-import AuthService from '../services/auth.service';
+import AuthService from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',

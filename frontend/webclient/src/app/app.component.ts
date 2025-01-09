@@ -4,20 +4,29 @@ import { login } from './myaccount/store/authstore.actions';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import BaseComponent from './shared/base.component';
+import AuthService from './myaccount/services/auth.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatTabsModule, MatIconModule, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, 
+    MatTabsModule, MatIconModule, RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit{
+export class AppComponent extends BaseComponent implements OnInit{
   title = 'Hathi';
   activeLink = '';
 
-  constructor(private store: Store){}
-
+   constructor(
+     store: Store<{ loggedIn: boolean }>,
+     authservice: AuthService
+   ) {
+     super(store, authservice)
+   }
+ 
   ngOnInit(): void {
     console.log('INIT APP COMPONENT');
     let jwtToken = sessionStorage.getItem('jwtToken');

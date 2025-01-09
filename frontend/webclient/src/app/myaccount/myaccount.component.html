@@ -1,7 +1,7 @@
-<div *ngIf="loggedIn$ | async">
+<div *ngIf="(loggedIn$ | async) && this.hasRole('ROLE_USER')">
     <button mat-flat-button (click)="logout()">Logout</button>
 </div>
-<div *ngIf="!(loggedIn$ | async)">
+<div *ngIf="!(loggedIn$ | async) ">
     <mat-tab-group>
         <mat-tab label="Belépés">
             <app-login></app-login>

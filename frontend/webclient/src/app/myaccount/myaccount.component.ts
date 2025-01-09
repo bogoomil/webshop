@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import AuthService from './services/auth.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-import { SignupComponent } from "./signup/signup.component";
+import { SignupComponent } from "./components/signup/signup.component";
+import BaseComponent from '../shared/base.component';
 
 @Component({
   selector: 'app-myaccount',
@@ -14,17 +15,15 @@ import { SignupComponent } from "./signup/signup.component";
   templateUrl: './myaccount.component.html',
   styleUrl: './myaccount.component.css'
 })
-export class MyaccountComponent{
-  loggedIn$: Observable<boolean>;
+export class MyaccountComponent extends BaseComponent{
   constructor(
-    private store: Store<{ loggedIn: boolean }>,
-    private authservice: AuthService
+    store: Store<{ loggedIn: boolean }>,
+    authservice: AuthService
   ) {
-    this.loggedIn$ = store.select('loggedIn');
+    super(store, authservice)
   }
 
   logout() {
     this.authservice.logout();
   }
-
 }

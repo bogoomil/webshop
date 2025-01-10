@@ -1,3 +1,4 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { Component, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -15,7 +16,7 @@ import AuthService from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatTabsModule],
+  imports: [FlexLayoutModule, CommonModule, MatButtonModule, MatDividerModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatTabsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   standalone: true,

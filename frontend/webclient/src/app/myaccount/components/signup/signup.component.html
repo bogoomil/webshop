@@ -1,170 +1,127 @@
 <form [formGroup]="registerForm" (ngSubmit)="submit()">
-
-  <!-- <div class="container" fxLayout="column" fxLayout.md="row" fxLayoutGap="20px"> -->
-  <div class="container" fxLayout.lt-md="column" fxLayout.md="column" fxLayout="row" fxFlex.md="100"
-    fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
-
-    <div class="cardWrap" fxFlex.lt-md="100" fxFlex="50">
-      <div fxLayout="column">
+  <div class="container" fxLayout fxLayoutAlign="center" fxLayoutGap="10px" fxLayout.lt-md="column">
+    <div class="cardWrap" fxFlex="33%" fxFlex.lt-md="100%">
+      <div fxLayout="column" fxFlexAlign="center">
         <h4>Személyes adatok</h4>
-        <div fxFlex="100%">
+        <mat-form-field>
+          <mat-label>Vezetéknév</mat-label>
+          <input matInput formControlName="lastName" name="lastName">
+          <mat-error *ngIf="registerForm.controls.lastName.errors?.['required']">Vezetéknév kötelező</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Keresztnév</mat-label>
+          <input matInput formControlName="firstName" name="firstName">
+          <mat-error *ngIf="registerForm.controls.firstName.errors?.['required']">Keresztnév kötelező</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" name="email">
+          <mat-error *ngIf="registerForm.controls.email.errors?.['required']">Email kötelező</mat-error>
+          <mat-error *ngIf="registerForm.controls.email.errors?.['email']">Email formátuma nem megfelelő</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" [type]="hide() ? 'password' : 'text'" />
+          <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()">
+            <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="registerForm.controls.password.errors?.['required']">Jelszó kötelező</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Telefonszám</mat-label>
+          <input matInput formControlName="phone1" name="phone1">
+          <mat-error *ngIf="registerForm.controls.phone1.errors?.['required']">Telefonszám kötelező</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Mellék</mat-label>
+          <input matInput formControlName="phone1Extension" name="phone1Extension">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="cardWrap" fxFlex="33%" fxFlex.lt-md="100%">
+      <div fxLayout="column">
+        <h4>Szállítási cím</h4>
+        <ng-container formGroupName="shippingAddress">
           <mat-form-field>
-            <mat-label>Vezetéknév</mat-label>
-            <input matInput formControlName="lastName" name="lastName">
-            <mat-error *ngIf="registerForm.controls.lastName.errors?.['required']">Vezetéknév kötelező</mat-error>
+            <mat-label>Név a címen</mat-label>
+            <input matInput formControlName="addressName" name="city">
           </mat-form-field>
-        </div>
-        <div fxFlex="100%">
           <mat-form-field>
-            <mat-label>Keresztnév</mat-label>
-            <input matInput formControlName="firstName" name="firstName">
-            <mat-error *ngIf="registerForm.controls.firstName.errors?.['required']">Keresztnév kötelező</mat-error>
+            <mat-label>Irányítószám</mat-label>
+            <input matInput formControlName="zip" name="zip">
+            <mat-error *ngIf="registerForm.controls.shippingAddress.controls.zip.errors?.['required']">Város
+              kötelező</mat-error>
           </mat-form-field>
-        </div>
-        <div fxFlex="100%">
           <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" name="email">
-            <mat-error *ngIf="registerForm.controls.email.errors?.['required']">Email kötelező</mat-error>
-            <mat-error *ngIf="registerForm.controls.email.errors?.['email']">Email formátuma nem megfelelő</mat-error>
+            <mat-label>Közterület</mat-label>
+            <input matInput formControlName="street" name="street">
+            <mat-error *ngIf="registerForm.controls.shippingAddress.controls.street.errors?.['required']">Közterület
+              kötelező</mat-error>
           </mat-form-field>
-        </div>
-        <div fxFlex="100%">
           <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput formControlName="password" [type]="hide() ? 'password' : 'text'" />
-            <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide()">
-              <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="registerForm.controls.password.errors?.['required']">Jelszó kötelező</mat-error>
+            <mat-label>Közterület 2</mat-label>
+            <input matInput formControlName="street2" name="street2">
           </mat-form-field>
-        </div>
-        <div fxFlex="100%">
           <mat-form-field>
-            <mat-label>Telefonszám</mat-label>
-            <input matInput formControlName="phone1" name="phone1">
-            <mat-error *ngIf="registerForm.controls.phone1.errors?.['required']">Telefonszám kötelező</mat-error>
+            <mat-label>Házszám</mat-label>
+            <input matInput formControlName="number" name="number">
           </mat-form-field>
-        </div>
-        <div fxFlex="100%">
           <mat-form-field>
-            <mat-label>Mellék</mat-label>
-            <input matInput formControlName="phone1Extension" name="phone1Extension">
+            <mat-label>Emelet</mat-label>
+            <input matInput formControlName="floor" name="floor">
           </mat-form-field>
-        </div>
+          <mat-form-field>
+            <mat-label>Ajtó</mat-label>
+            <input matInput formControlName="door" name="door">
+          </mat-form-field>
+        </ng-container>
+      </div>
+    </div>
+    <div class="cardWrap" fxFlex="33%" fxFlex.lt-md="100%">
+      <div fxLayout="column">
+        <h4>Számlázásí cím</h4>
+        <ng-container formGroupName="billingAddress">
+          <mat-form-field>
+            <mat-label>Név a címen</mat-label>
+            <input matInput formControlName="addressName" name="city">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Irányítószám</mat-label>
+            <input matInput formControlName="zip" name="zip">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Közterület</mat-label>
+            <input matInput formControlName="street" name="street">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Közterület 2</mat-label>
+            <input matInput formControlName="street2" name="street2">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Házszám</mat-label>
+            <input matInput formControlName="number" name="number">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Emelet</mat-label>
+            <input matInput formControlName="floor" name="floor">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Ajtó</mat-label>
+            <input matInput formControlName="door" name="door">
+          </mat-form-field>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="container" fxLayout fxLayoutAlign="center" fxLayoutGap="10px" fxLayout.lt-md="column">
+    <div class="cardWrap" fxFlex="100%" >
+      <div fxLayout="column" fxFlexAlign="center">
         <div fxFlex="100%">
           <button mat-stroked-button color="primary" type="submit"
             [disabled]="!registerForm.valid">Register<mat-icon>chevron_right</mat-icon></button>
         </div>
       </div>
     </div>
-
-    <div class="cardWrap" fxFlex.lt-md="100" fxFlex="50">
-      <div fxLayout="column">
-        <h4>Szállítási cím</h4>
-        <ng-container formGroupName="shippingAddress">
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Név a címen</mat-label>
-              <input matInput formControlName="addressName" name="city">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Irányítószám</mat-label>
-              <input matInput formControlName="zip" name="zip">
-              <mat-error *ngIf="registerForm.controls.shippingAddress.controls.zip.errors?.['required']">Város
-                kötelező</mat-error>
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Közterület</mat-label>
-              <input matInput formControlName="street" name="street">
-              <mat-error *ngIf="registerForm.controls.shippingAddress.controls.street.errors?.['required']">Közterület
-                kötelező</mat-error>
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Közterület 2</mat-label>
-              <input matInput formControlName="street2" name="street2">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Házszám</mat-label>
-              <input matInput formControlName="number" name="number">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Emelet</mat-label>
-              <input matInput formControlName="floor" name="floor">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Ajtó</mat-label>
-              <input matInput formControlName="door" name="door">
-            </mat-form-field>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-
-    <div class="cardWrap" fxFlex.lt-md="100" fxFlex="50">
-      <div fxLayout="column">
-        <h4>Számlázásí cím</h4>
-        <ng-container formGroupName="billingAddress">
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Név a címen</mat-label>
-              <input matInput formControlName="addressName" name="city">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Irányítószám</mat-label>
-              <input matInput formControlName="zip" name="zip">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Közterület</mat-label>
-              <input matInput formControlName="street" name="street">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Közterület 2</mat-label>
-              <input matInput formControlName="street2" name="street2">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Házszám</mat-label>
-              <input matInput formControlName="number" name="number">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Emelet</mat-label>
-              <input matInput formControlName="floor" name="floor">
-            </mat-form-field>
-          </div>
-          <div fxFlex="100%">
-            <mat-form-field>
-              <mat-label>Ajtó</mat-label>
-              <input matInput formControlName="door" name="door">
-            </mat-form-field>
-          </div>
-        </ng-container>
-      </div>
-    </div>
   </div>
-
-  <!-- </div> -->
-
 </form>

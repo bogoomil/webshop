@@ -5,12 +5,14 @@ import hu.boga.webshop.core.user.model.Address;
 import hu.boga.webshop.core.user.model.User;
 import hu.boga.webshop.core.user.model.enums.AddressType;
 import hu.boga.webshop.webapp.user.dto.SignupForm;
+import jakarta.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +29,7 @@ public class UserController {
   final PasswordEncoder encoder;
 
   @PostMapping("/public/signup")
-  public ResponseEntity<Void> signup(@RequestBody SignupForm signupForm) {
+  public ResponseEntity<Void> signup(@Validated @RequestBody SignupForm signupForm) {
     userInteractor.registerUser(getUserFromSignupForm(signupForm));
     return ResponseEntity.ok().build();
   }

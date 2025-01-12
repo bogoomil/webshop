@@ -1,6 +1,6 @@
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import AuthService from "../myaccount/services/auth.service";
+import AuthService from "../user/services/auth.service";
 
 export default class BaseComponent {
   loggedIn$: Observable<boolean>;

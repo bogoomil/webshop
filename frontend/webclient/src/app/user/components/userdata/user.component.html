@@ -19,7 +19,7 @@
           <mat-error *ngIf="registerForm.controls.email.errors?.['required']">Email kötelező</mat-error>
           <mat-error *ngIf="registerForm.controls.email.errors?.['email']">Email formátuma nem megfelelő</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field *ngIf="create">
           <mat-label>Password</mat-label>
           <input matInput formControlName="password" [type]="hide() ? 'password' : 'text'" />
           <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
@@ -119,7 +119,7 @@
       <div fxLayout="column" fxFlexAlign="center">
         <div fxFlex="100%">
           <button mat-stroked-button color="primary" type="submit"
-            [disabled]="!registerForm.valid">Register<mat-icon>chevron_right</mat-icon></button>
+            [disabled]="!registerForm.valid">{{buttonLabel}}<mat-icon>chevron_right</mat-icon></button>
         </div>
       </div>
     </div>

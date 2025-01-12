@@ -1,11 +1,12 @@
 package hu.boga.webshop.webapp.user.controller;
 
+import hu.boga.webshop.core.user.exceptions.CoreException;
 import hu.boga.webshop.core.user.interactor.UserInteractor;
 import hu.boga.webshop.core.user.model.Address;
 import hu.boga.webshop.core.user.model.User;
 import hu.boga.webshop.core.user.model.enums.AddressType;
-import hu.boga.webshop.webapp.user.dto.SignupForm;
-import jakarta.validation.Valid;
+import hu.boga.webshop.webapp.user.dto.UserDtoMapper;
+import hu.boga.webshop.webapp.user.dto.UserForm;
 import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,53 +28,69 @@ public class UserController {
 
   final UserInteractor userInteractor;
   final PasswordEncoder encoder;
+  final UserDtoMapper userDtoMapper;
 
   @PostMapping("/public/signup")
-  public ResponseEntity<Void> signup(@Validated @RequestBody SignupForm signupForm) {
-    userInteractor.registerUser(getUserFromSignupForm(signupForm));
+  public ResponseEntity<Void> signupUser(@Validated @RequestBody UserForm userForm) {
+    User user = getUserFromSignupForm(userForm);
+    user.setPassword(encoder.encode(userForm.getPassword()));
+    userInteractor.registerUser(user);
     return ResponseEntity.ok().build();
   }
 
-  private User getUserFromSignupForm(SignupForm signupForm) {
+  @PostMapping("/private/update")
+  public ResponseEntity<UserForm> updateUser(@Validated @RequestBody UserForm userForm) {
+    User user = userInteractor.updateUser(getUserFromSignupForm(userForm));
+    return ResponseEntity.ok().body(userDtoMapper.toUserForm(user));
+  }
+
+  private User getUserFromSignupForm(UserForm userForm) {
     return User.builder()
-        .email(signupForm.getEmail())
-        .username(signupForm.getUsername())
-        .firstName(signupForm.getFirstName())
-        .lastName(signupForm.getLastName())
-        .password(encoder.encode(signupForm.getPassword()))
-        .addresses(getAddresses(signupForm))
+        .email(userForm.getEmail())
+        .username(userForm.getUsername())
+        .firstName(userForm.getFirstName())
+        .lastName(userForm.getLastName())
+        .addresses(getAddresses(userForm))
+        .phone1(userForm.getPhone1())
+        .phone1Extension(userForm.getPhone1Extension())
         .build();
   }
 
-  private Collection<Address> getAddresses(SignupForm signupForm) {
+  private Collection<Address> getAddresses(UserForm userForm) {
     return List.of(
         Address.builder()
-            .city(signupForm.getBillingAddress().getCity())
-            .country(signupForm.getBillingAddress().getCountry())
-            .door(signupForm.getBillingAddress().getDoor())
-            .floor(signupForm.getBillingAddress().getFloor())
-            .number(signupForm.getBillingAddress().getNumber())
-            .street(signupForm.getBillingAddress().getStreet())
-            .street2(signupForm.getBillingAddress().getStreet2())
+            .addressName(userForm.getBillingAddress().getAddressName())
+            .city(userForm.getBillingAddress().getCity())
+            .country(userForm.getBillingAddress().getCountry())
+            .door(userForm.getBillingAddress().getDoor())
+            .floor(userForm.getBillingAddress().getFloor())
+            .number(userForm.getBillingAddress().getNumber())
+            .street(userForm.getBillingAddress().getStreet())
+            .street2(userForm.getBillingAddress().getStreet2())
             .type(AddressType.ADDRESS_TYPE_BILLING)
-            .zip(signupForm.getBillingAddress().getZip())
+            .zip(userForm.getBillingAddress().getZip())
             .build(),
         Address.builder()
-            .city(signupForm.getShippingAddress().getCity())
-            .country(signupForm.getShippingAddress().getCountry())
-            .door(signupForm.getShippingAddress().getDoor())
-            .floor(signupForm.getShippingAddress().getFloor())
-            .number(signupForm.getShippingAddress().getNumber())
-            .street(signupForm.getShippingAddress().getStreet())
-            .street2(signupForm.getShippingAddress().getStreet2())
+            .addressName(userForm.getShippingAddress().getAddressName())
+            .city(userForm.getShippingAddress().getCity())
+            .country(userForm.getShippingAddress().getCountry())
+            .door(userForm.getShippingAddress().getDoor())
+            .floor(userForm.getShippingAddress().getFloor())
+            .number(userForm.getShippingAddress().getNumber())
+            .street(userForm.getShippingAddress().getStreet())
+            .street2(userForm.getShippingAddress().getStreet2())
             .type(AddressType.ADDRESS_TYPE_SHIPPING)
-            .zip(signupForm.getShippingAddress().getZip())
+            .zip(userForm.getShippingAddress().getZip())
             .build());
   }
 
-  @GetMapping("/private/userlist")
+  @GetMapping("/private/user/{email}")
   @PreAuthorize("hasAnyRole('ROLE_USER')")
-  public List<String> userList() {
-    return userInteractor.getAllUsers().stream().map(User::getEmail).toList();
+  public UserForm getUserByEmail(@PathVariable String email) {
+    return userInteractor.findByEmail(email).map(user -> convertUserToUserForm(user)).orElseThrow(() -> new CoreException("user not found"));
+  }
+
+  private UserForm convertUserToUserForm(User user) {
+    return userDtoMapper.toUserForm(user);
   }
 }

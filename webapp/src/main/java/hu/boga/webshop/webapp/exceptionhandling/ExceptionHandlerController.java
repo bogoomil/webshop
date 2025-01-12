@@ -28,6 +28,6 @@ public class ExceptionHandlerController {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(CoreException.class)
   public Map<String, String> handleCoreExceptions(CoreException ex) {
-    return Map.of("core exception", ex.getMessage());
+    return Map.of("message", ex.getMessage());
   }
 }

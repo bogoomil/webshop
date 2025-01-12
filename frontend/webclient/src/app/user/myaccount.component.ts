@@ -6,12 +6,14 @@ import { Store } from '@ngrx/store';
 import AuthService from './services/auth.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-import { SignupComponent } from "./components/signup/signup.component";
+// import { UserCreateComponent } from "./components/userdata/user-create.component";
 import BaseComponent from '../shared/base.component';
+import { UserCreateComponent } from "./components/userdata/user-create.component";
+import { UserUpdateComponent } from "./components/userdata/user-update.component";
 
 @Component({
   selector: 'app-myaccount',
-  imports: [LoginComponent, CommonModule, MatTabsModule, MatButtonModule, SignupComponent],
+  imports: [LoginComponent, CommonModule, MatTabsModule, MatButtonModule, UserCreateComponent, UserUpdateComponent],
   templateUrl: './myaccount.component.html',
   styleUrl: './myaccount.component.css',
   standalone: true

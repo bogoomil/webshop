@@ -6,7 +6,7 @@ import {ConditionsComponent} from './conditions/conditions.component';
 import {ContactComponent} from './contact/contact.component';
 import {PrivacyComponent} from './privacy/privacy.component';
 import {ShoppingcartComponent} from './shoppingcart/shoppingcart.component';
-import {MyaccountComponent} from './myaccount/myaccount.component';
+import {MyaccountComponent} from './user/myaccount.component';
 import {AllergenComponent} from './allergen/allergen.component';
 
 export const routes: Routes = [

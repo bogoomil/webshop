@@ -9,18 +9,21 @@ import { TokenPayload } from '../models/auth.interface';
 })
 export default class AuthService{
   constructor(private store: Store, private api: ApiService) {} 
-  
-  
+    
   login(username: string, password: string){
     this.api.authenticate(username, password).subscribe(response => {
       sessionStorage.setItem('jwtToken', response.jwttoken);
-      this.store.dispatch(login());
+      this.api.loadUser(username).subscribe(response => {
+        sessionStorage.setItem('currentUser', JSON.stringify(response));
+        this.store.dispatch(login());
+      })
     });
   }
 
   logout(){
     this.store.dispatch(logout());
     sessionStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('currentUser');
   }
 
   hasRole(roleName: string): boolean {

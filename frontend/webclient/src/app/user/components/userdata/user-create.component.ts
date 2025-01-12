@@ -10,17 +10,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';  
+import UserService from '../../services/user.service';
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
+  selector: 'app-user-create',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss'],
   standalone: true,
   imports: [FlexLayoutModule, FormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule]
 })
-export class SignupComponent {
+export class UserCreateComponent {
+
+  constructor(private userService: UserService){}
+
   hide = signal(true);
-  user: User = new User();
+
+  create = true;
+
+  buttonLabel = 'Regisztráció';
+  
   registerForm = new FormGroup<UserForm>({
     lastName: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
@@ -60,7 +68,7 @@ export class SignupComponent {
 
   submit() {
     console.log('user: ' + JSON.stringify(this.registerForm.getRawValue()));
-    this
+    this.userService.signup(this.registerForm.getRawValue());
   }
 
 

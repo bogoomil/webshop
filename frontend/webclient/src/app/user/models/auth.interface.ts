@@ -15,31 +15,29 @@ export interface Role {
     authority: string;
 }
 
-export class User {
-    email!: string;
-    username!: string;
-    firstName!: string;
-    lastName!: string;  
-    password!: string;
-    phone1!: string;
-    phone1Extension!: string;
-    phone2!: string;  
-    phone2Extension!: string;
+export interface User {
+    email: string;
+    username: string;
+    firstName: string;
+    lastName: string;  
+    password: string;
+    phone1: string;
+    phone1Extension: string;
   
-    shippingAddress!: Address;
-    billingAddress!: Address;
+    shippingAddress: Address;
+    billingAddress: Address;
 }
 
-export class Address {
-    addressName!: string;
-    city!: string;
-    country!: string;
-    door!: string;
-    floor!: string;
-    number!: string;
-    street!: string;
-    street2!: string;
-    zip!: string;
+export interface Address {
+    addressName: string;
+    city: string;
+    country: string;
+    door: string;
+    floor: string;
+    number: string;
+    street: string;
+    street2: string;
+    zip: string;
 }
 
 export interface UserForm {
@@ -50,8 +48,7 @@ export interface UserForm {
     password: FormControl;
     phone1: FormControl;
     phone1Extension: FormControl;
-    // phone2: FormControl;  
-    // phone2Extension: FormControl;
+    
     shippingAddress: FormGroup<AddressForm>;
     billingAddress: FormGroup<AddressForm>;
 }

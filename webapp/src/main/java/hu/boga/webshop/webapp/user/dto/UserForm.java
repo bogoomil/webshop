@@ -4,17 +4,17 @@
  */
 package hu.boga.webshop.webapp.user.dto;
 
-import hu.boga.webshop.core.user.model.enums.AddressType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.lang.NonNull;
 
 /**
  * @author user
  */
 @Data
-public class SignupForm {
+@Builder
+public class UserForm {
 
   @NotNull(message = "email address must not be null")
   private String email;

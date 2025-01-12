@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { login } from './myaccount/store/authstore.actions';
+import { login } from './user/store/authstore.actions';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import BaseComponent from './shared/base.component';
-import AuthService from './myaccount/services/auth.service';
+import AuthService from './user/services/auth.service';
 import { CommonModule } from '@angular/common';
 
 

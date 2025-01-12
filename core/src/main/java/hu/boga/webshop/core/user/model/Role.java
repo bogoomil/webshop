@@ -10,10 +10,6 @@ import lombok.Data;
 /**
  * @author user
  */
-@Data
-public class Role {
-
-  private String name;
-
-  private Long id;
+public enum Role {
+  ROLE_ADMIN, ROLE_USER;
 }

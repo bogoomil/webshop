@@ -9,5 +9,5 @@ public interface UserGateway {
 
   Optional<User> findByEmail(String email);
 
-  void registerUser(User user);
+  User saveUser(User user);
 }

@@ -4,6 +4,7 @@
  */
 package hu.boga.webshop.persistence.model;
 
+import hu.boga.webshop.core.user.model.enums.AddressType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +19,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import lombok.Data;
 
 /**
@@ -60,12 +63,16 @@ public class UserEntity {
 
   @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
-  private Collection<RoleEntity> roles = new ArrayList<>(0);
+  private List<RoleEntity> roles = new ArrayList<>(0);
 
   @Id
   @Column(name = "user_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  public Optional<AddressEntity> getAddressEntityByType(AddressType type){
+    return addressEntities.stream().filter(addressEntity -> type.equals(addressEntity.getType())).findAny();
+  }
 
 
 }

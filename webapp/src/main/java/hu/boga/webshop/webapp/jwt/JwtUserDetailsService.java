@@ -32,7 +32,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     private static org.springframework.security.core.userdetails.User processUserDetails(User user) {
         Collection<GrantedAuthority> auths = new ArrayList<>();
         for (Role r : user.getRoles()) {
-            SimpleGrantedAuthority auth = new SimpleGrantedAuthority(r.getName());
+            SimpleGrantedAuthority auth = new SimpleGrantedAuthority(r.name());
             auths.add(auth);
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), auths);

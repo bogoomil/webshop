@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Authentication, User } from '../models/auth.interface';
+import { Authentication, User, UserForm } from '../models/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +23,13 @@ export default class ApiService {
 
   signup(user: User){
     return this.http.post<Authentication>('/api/public/signup', user);
+  }
+
+  updateUser(user: User){
+    return this.http.post<UserForm>('/api/private/update', user);
+  }
+
+  loadUser(email: string): Observable<User> {
+    return this.http.get<User>('/api/private/user/' + email);
   }
 }

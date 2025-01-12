@@ -14,12 +14,17 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface UserMapper {
   @Mapping(target = "addresses", expression = "java(toAddressList(userEntity.getAddressEntities()))")
+  @Mapping(target = "roles", expression = "java(toRoleList(userEntity.getRoles()))")
   User toUser(UserEntity userEntity);
 
   Address toAddress(AddressEntity addressEntity);
 
   default List<Address> toAddressList(Collection<AddressEntity> addressEntities){
     return addressEntities.stream().map(this::toAddress).toList();
+  }
+
+  default List<Role> toRoleList(List<RoleEntity> roleEntities){
+    return roleEntities.stream().map(roleEntity -> Role.valueOf(roleEntity.getName())).toList();
   }
 
   @Mapping(target = "addressEntities", expression = "java(toAddressEntityList(user.getAddresses()))")
@@ -35,10 +40,11 @@ public interface UserMapper {
     return addresses.stream().map(this::toAddressEntity).toList();
   }
 
-  @Mapping(target = "userEntities", ignore = true)
-  RoleEntity toRoleEntity(Role role);
-
-  default List<RoleEntity> toRoleEntityList(Collection<Role> roles){
-    return roles.stream().map(this::toRoleEntity).toList();
-  }
+//  @Mapping(target = "userEntities", ignore = true)
+//  @Mapping(target = "id", ignore = true)
+//  RoleEntity toRoleEntity(Role role);
+//
+//  default List<RoleEntity> toRoleEntityList(Collection<Role> roles){
+//    return roles.stream().map(this::toRoleEntity).toList();
+//  }
 }

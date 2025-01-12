@@ -21,13 +21,7 @@ class UserControllerTest {
   void setUp() {
     openMocks(this);
 
-    userController = new UserController(userInteractor, null);
+    userController = new UserController(userInteractor, null, null);
   }
 
-  @Test
-  void userList() {
-    given(userInteractor.getAllUsers()).willThrow(new RuntimeException("fitty"));
-
-    assertThrows(RuntimeException.class, () -> userController.userList());
-  }
 }

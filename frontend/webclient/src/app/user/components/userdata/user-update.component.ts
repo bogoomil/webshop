@@ -53,10 +53,10 @@ export class UserUpdateComponent implements OnInit{
         country: new FormControl(this.user?.billingAddress.country),
         door: new FormControl(this.user?.billingAddress.door),
         floor: new FormControl(this.user?.billingAddress.floor),
-        number: new FormControl(this.user?.billingAddress.number, Validators.required),
-        street: new FormControl(this.user?.billingAddress.street, Validators.required),
+        number: new FormControl(this.user?.billingAddress.number),
+        street: new FormControl(this.user?.billingAddress.street),
         street2: new FormControl(this.user?.billingAddress.street2),
-        zip: new FormControl(this.user?.billingAddress.zip, Validators.required)
+        zip: new FormControl(this.user?.billingAddress.zip)
       })
     });
   

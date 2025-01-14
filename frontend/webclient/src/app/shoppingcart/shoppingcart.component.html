@@ -1,1 +1,8 @@
-<p>shoppingcart works!</p>
+<div *ngFor="let item of (order$ | async)?.items">{{item.name}} count: {{item.count}}
+<button mat-mini-fab (click)="addToCart(item)">
+    <mat-icon>add_shopping_cart</mat-icon>
+</button>
+<button mat-mini-fab (click)="removeFromCart(item)">
+    <mat-icon>remove_shopping_cart</mat-icon>
+</button>
+</div>

@@ -1,14 +1,14 @@
-import { createSelector } from '@ngrx/store';
-import { AppStateInterface } from '../../shared/menu.interface';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Cart, Item } from '../../shared/menu.interface';
 
-export const selectFeature = (state: AppStateInterface) => state.products;
+export const selectStoreState = createFeatureSelector<Cart>('cart');
 
-export const cartSelector = createSelector(
-  selectFeature,
-  (state) => state.products
+export const selectItems = createSelector(
+    selectStoreState,
+    (state) => state.products
 );
 
-export const errorSelector = createSelector(
-  selectFeature,
-  (state) => state.error
+export const selectErrors = createSelector(
+    selectStoreState,
+    (state) => state.error
 );

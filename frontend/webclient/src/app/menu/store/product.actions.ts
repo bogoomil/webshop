@@ -1,6 +1,6 @@
 // product.action.ts
 import { createAction, props } from "@ngrx/store";
-import { Item } from "../../shared/menu.interface";
+import { CartItem } from "../../shared/menu.interface";
 
 export const getCart = createAction(
     '[Cart] Get Cart Items',
@@ -8,12 +8,12 @@ export const getCart = createAction(
 
 export const postCart = createAction(
     '[Cart] Post Cart',
-    props<{ products: Item }>()
+    props<{ cartItem: CartItem }>()
 );
 
 export const removeItemFromCart = createAction(
     '[Cart] Remove Item from Cart',
-    props<{ product: Item }>()
+    props<{ cartItem: CartItem }>()
 );
 
 export const getCartFailure = createAction(

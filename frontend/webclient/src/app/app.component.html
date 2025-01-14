@@ -29,10 +29,16 @@
     Allergén info
   </a>
 
-  <a mat-tab-link (click)="activeLink = '/shoppingcart'"
+  <!-- <a mat-tab-link (click)="activeLink = '/shoppingcart'"
      [active]="activeLink == '/shoppingcart'" routerLink="/shoppingcart" >
     <mat-icon>shopping_cart</mat-icon>
-  </a>
+  </a> -->
+
+  <a mat-tab-link (click)="activeLink = '/shoppingcart'"
+     [active]="activeLink == '/shoppingcart'" routerLink="/shoppingcart" >
+     <app-cart></app-cart>
+    </a>
+
 
   <a mat-tab-link (click)="activeLink = '/myaccount'"
      [active]="activeLink == '/myaccount'" routerLink="/myaccount" >

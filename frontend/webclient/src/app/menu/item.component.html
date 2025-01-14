@@ -9,9 +9,6 @@
         <p>csomagolás: {{item?.packagingFee}}</p>
       </mat-card-content>
     <mat-card-actions>
-        <button mat-mini-fab (click)="addToBasket('' + item?.name)">
-            <mat-icon>shopping_cart</mat-icon>
-        </button>
-        <app-cart-options [product]="item"></app-cart-options>
+        <app-cart-options [item]="item"></app-cart-options>
     </mat-card-actions>
 </mat-card>

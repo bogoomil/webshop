@@ -10,13 +10,17 @@ export interface Item {
     packagingFee: number;
 }
 
-export interface Cart {
-    products: Item[];
-    error: string | null;
-    
+export interface CartItem {
+    name: string;
+    price: number;
+    packagingFee: number;
 }
 
+export interface Cart {
+    products: CartItem[];
+    error: string | null;
+}
 
-export interface AppStateInterface {
-    products: Cart;
+export interface GroupedCartResult {
+    items: Array<CartItem & { count: number }>;
 }

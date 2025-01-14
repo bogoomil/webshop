@@ -7,12 +7,13 @@ import { MatIconModule } from '@angular/material/icon';
 import BaseComponent from './shared/base.component';
 import AuthService from './user/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { CartComponent } from "./menu/cart/cart.component";
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, 
-    MatTabsModule, MatIconModule, RouterLink, RouterLinkActive, CommonModule],
+  imports: [RouterOutlet,
+    MatTabsModule, MatIconModule, RouterLink, RouterLinkActive, CommonModule, CartComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package hu.boga.webshop.persistence.model;
+package hu.boga.webshop.persistence.menu.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,13 +38,13 @@ public class KategoriaEntity {
   private Long id;
 
   @Column(name = "megnevezes", nullable = false)
-  private String megnevezes;
+  private String name;
 
   @ManyToOne
   @JoinColumn(name = "parentId")
   private KategoriaEntity parent;
 
   @OneToMany(mappedBy = "kategoria", cascade = CascadeType.REMOVE)
-  private Collection<TetelEntity> tetelek;
+  private List<TetelEntity> tetelek;
 
 }

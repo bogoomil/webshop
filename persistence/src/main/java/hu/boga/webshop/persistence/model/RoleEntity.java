@@ -5,6 +5,7 @@
 
 package hu.boga.webshop.persistence.model;
 
+import hu.boga.webshop.persistence.user.model.UserEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

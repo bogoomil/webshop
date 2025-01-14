@@ -1,0 +1,17 @@
+<mat-card  class="mat-elevation-z4">
+    <mat-card-header>
+        <mat-card-title>{{item?.name}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="'data:image/png;base64, ' + item?.image">
+    <mat-card-content>
+        <p>{{item?.description}}</p>
+        <p>ár: {{item?.price}}</p>
+        <p>csomagolás: {{item?.packagingFee}}</p>
+      </mat-card-content>
+    <mat-card-actions>
+        <button mat-mini-fab (click)="addToBasket('' + item?.name)">
+            <mat-icon>shopping_cart</mat-icon>
+        </button>
+        <app-cart-options [product]="item"></app-cart-options>
+    </mat-card-actions>
+</mat-card>

@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package hu.boga.webshop.core.user.model;
+package hu.boga.webshop.core.order.model;
 
 import lombok.Data;
 

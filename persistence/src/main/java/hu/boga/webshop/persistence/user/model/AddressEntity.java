@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package hu.boga.webshop.persistence.model;
+package hu.boga.webshop.persistence.user.model;
 
 import hu.boga.webshop.core.user.model.enums.AddressType;
 import jakarta.persistence.Column;

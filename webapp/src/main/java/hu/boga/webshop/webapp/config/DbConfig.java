@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EntityScan(basePackages = "hu.boga.webshop.persistence.model")
+@EntityScan(basePackages = "hu.boga.webshop.persistence")
 @EnableJpaRepositories(basePackages = "hu.boga.webshop.persistence.repos")
 public class DbConfig {
 

@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package hu.boga.webshop.persistence.model;
+package hu.boga.webshop.persistence.user.model;
 
 import hu.boga.webshop.core.user.model.enums.AddressType;
+import hu.boga.webshop.persistence.model.RoleEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

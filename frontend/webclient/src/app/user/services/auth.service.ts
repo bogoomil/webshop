@@ -1,8 +1,8 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { login, logout } from '../store/authstore.actions';
 import ApiService from './api.service';
-import { TokenPayload } from '../models/auth.interface';
+import { TokenPayload } from '../../shared/auth.interface';
 
 @Injectable({
   providedIn: 'root',

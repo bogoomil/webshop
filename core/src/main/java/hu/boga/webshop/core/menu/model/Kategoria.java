@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package hu.boga.webshop.core.user.model;
+package hu.boga.webshop.core.menu.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,9 +19,9 @@ public class Kategoria {
 
   private List<Kategoria> children = new ArrayList<>();
 
-  private String megnevezes;
+  private String name;
 
   private Kategoria parent;
 
-  private Collection<Tetel> tetelek;
+  private List<Tetel> tetelek;
 }

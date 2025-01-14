@@ -1,9 +1,7 @@
-import { User, UserForm } from '../models/auth.interface';
+import { User, UserForm } from '../../shared/auth.interface';
 import { Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { login, logout } from '../store/authstore.actions';
 import ApiService from './api.service';
-import { TokenPayload } from '../models/auth.interface';
 import AuthService from './auth.service';
 
 @Injectable({
@@ -21,6 +19,7 @@ export default class UserService{
   updateUser(user: User){
     this.api.updateUser(user).subscribe(response => {
       sessionStorage.setItem('currentUser', JSON.stringify(response));
+      alert('Mentés sikeres.')
     });
   }
 

@@ -1,7 +1,10 @@
 package hu.boga.webshop.webapp.config;
 
+import hu.boga.webshop.core.menu.gateway.MenuGateway;
+import hu.boga.webshop.core.menu.interactor.MenuInteractor;
 import hu.boga.webshop.core.user.gateway.UserGateway;
 import hu.boga.webshop.core.user.interactor.UserInteractor;
+import hu.boga.webshop.persistence.repos.KategoriaRepository;
 import hu.boga.webshop.persistence.repos.RoleRepository;
 import hu.boga.webshop.persistence.repos.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +14,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class BeanConfig {
 
   final UserRepository userRepository;
   final RoleRepository roleRepository;
+  final KategoriaRepository kategoriaRepository;
 
   @Bean
   UserInteractor getUserInteractor(@Autowired UserGateway userGateway){
@@ -28,17 +30,13 @@ public class BeanConfig {
   }
 
   @Bean
+  MenuInteractor getMenuInteractor(@Autowired MenuGateway menuGateway){
+    return new MenuInteractor(menuGateway);
+  }
+
+  @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
-//  @Bean
-//  public WebMvcConfigurer corsConfigurer() {
-//    return new WebMvcConfigurer() {
-//      @Override
-//      public void addCorsMappings(CorsRegistry registry) {
-//        registry.addMapping("/greeting-javaconfig").allowedOrigins("http://localhost:9000");
-//      }
-//    };
-//  }
 }

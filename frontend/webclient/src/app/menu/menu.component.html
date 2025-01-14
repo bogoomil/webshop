@@ -1,2 +1,14 @@
-<p>menu works!</p>
-<div>Current Count: {{ count$ | async }}</div>
+<button *ngFor="let o of kats" mat-flat-button routerLink="{{'/menu/' + enc(o.name)}}" >{{ o.name }}</button>
+<h4>{{currentCategory}}</h4>
+<div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div
+        fxFlex="25%"
+        fxFlex.xs="100%"
+        fxFlex.sm="33%"
+        *ngFor="let i of items"
+      >
+      <app-item [item]="i"></app-item>
+      </div>
+    </div>
+  </div>

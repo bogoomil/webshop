@@ -1,4 +1,4 @@
-package hu.boga.webshop.core.user.model;
+package hu.boga.webshop.core.shop.model;
 
 import lombok.Data;
 

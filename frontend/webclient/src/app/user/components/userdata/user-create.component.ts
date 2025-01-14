@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AddressForm, User, UserForm } from '../../models/auth.interface';
+import { AddressForm, User, UserForm } from '../../../shared/auth.interface';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { merge } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

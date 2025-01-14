@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package hu.boga.webshop.core.user.model;
+package hu.boga.webshop.core.order.model;
 
+import hu.boga.webshop.core.shop.model.Shop;
 import hu.boga.webshop.core.user.model.enums.OrderStatus;
 import hu.boga.webshop.core.user.model.enums.PaymentMethodType;
 import java.time.LocalDate;

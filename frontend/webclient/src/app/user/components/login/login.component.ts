@@ -1,9 +1,6 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Component, OnInit, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import ApiService from '../../services/api.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';

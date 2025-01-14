@@ -23,13 +23,22 @@ import { map } from 'rxjs/operators';
 export class ShoppingcartComponent {
 
   order$: Observable<GroupedCartResult>;
+  sum$: Observable<number> = of(0);
 
 
   constructor(private store: Store<Cart>) {
     this.order$ = this.groupCartItems(this.store.select(selectItems));
     this.order$.subscribe(result => {
-      console.log("faszomöccse: " + JSON.stringify(result));
+      this.sum$ = of(this.getSum(result));
     });
+  }
+
+  getSum(groupedResult: GroupedCartResult): number {
+    let sum = 0;
+    groupedResult.items.forEach(item => {
+      sum += item.count * (item.price + item.packagingFee);
+    })
+    return sum;
   }
 
   groupCartItems(cartItems$: Observable<CartItem[]>): Observable<GroupedCartResult> {

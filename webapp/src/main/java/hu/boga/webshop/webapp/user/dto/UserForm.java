@@ -4,6 +4,7 @@
  */
 package hu.boga.webshop.webapp.user.dto;
 
+import hu.boga.webshop.core.user.model.Role;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -38,5 +39,7 @@ public class UserForm {
   private Address shippingAddress;
 
   private Address billingAddress;
+
+  private Role[] roles;
 
 }

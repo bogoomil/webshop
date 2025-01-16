@@ -28,6 +28,7 @@ export interface User {
     password: string;
     phone1: string;
     phone1Extension: string;
+    roles: string[] | null;
   
     shippingAddress: Address;
     billingAddress: Address;
@@ -53,6 +54,7 @@ export interface UserForm {
     password: FormControl;
     phone1: FormControl;
     phone1Extension: FormControl;
+    roles: FormControl;
     
     shippingAddress: FormGroup<AddressForm>;
     billingAddress: FormGroup<AddressForm>;

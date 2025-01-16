@@ -43,6 +43,7 @@ export class UserUpdateComponent extends UserBaseComponent implements OnInit{
       password: new FormControl(this.user?.password),
       phone1: new FormControl(this.user?.phone1, Validators.required),
       phone1Extension: new FormControl(this.user?.phone1Extension),
+      roles: new FormControl(null),
       shippingAddress: new FormGroup<AddressForm>({
         addressName: new FormControl(this.user?.shippingAddress.addressName),
         city: new FormControl(this.user?.shippingAddress.city),

@@ -43,6 +43,7 @@ export default class UserService{
         password: '',
         phone1: '',
         phone1Extension: '',
+        roles: [],
         shippingAddress: {
           addressName: '',
           city: '',

@@ -38,6 +38,7 @@ export class UserCreateComponent extends UserBaseComponent {
     password: new FormControl('', [Validators.required]),
     phone1: new FormControl('', Validators.required),
     phone1Extension: new FormControl(''),
+    roles: new FormControl(null),
     shippingAddress: new FormGroup<AddressForm>({
       addressName: new FormControl(''),
       city: new FormControl(''),

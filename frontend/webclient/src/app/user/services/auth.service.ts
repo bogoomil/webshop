@@ -8,8 +8,8 @@ import { loginUser, logoutUser } from '../store/user.actions';
   providedIn: 'root',
 })
 export default class AuthService{
-  constructor(private store: Store, private api: ApiService) {} 
-    
+  constructor(private store: Store, private api: ApiService) {}
+
   login(username: string, password: string){
     this.api.authenticate(username, password).subscribe(jwtResponse => {
       sessionStorage.setItem('jwtToken', jwtResponse.jwtToken);
@@ -26,19 +26,19 @@ export default class AuthService{
     sessionStorage.removeItem('currentUser');
   }
 
-  hasRole(roleName: string): boolean {
-    let retVal = false;
-    let token = sessionStorage.getItem('jwtToken');
-    if(token){
-      let parts = token.split('.');
-      let payload = atob(parts[1]);
-      let tokenPayload: TokenPayload = JSON.parse(payload);
-      tokenPayload.roles.forEach(element => {
-        if(element.authority === roleName){
-          retVal = true;
-        }
-      });
-    }
-    return retVal;
-  }
+  // hasRole(roleName: string): boolean {
+  //   let retVal = false;
+  //   let token = sessionStorage.getItem('jwtToken');
+  //   if(token){
+  //     let parts = token.split('.');
+  //     let payload = atob(parts[1]);
+  //     let tokenPayload: TokenPayload = JSON.parse(payload);
+  //     tokenPayload.roles.forEach(element => {
+  //       if(element.authority === roleName){
+  //         retVal = true;
+  //       }
+  //     });
+  //   }
+  //   return retVal;
+  // }
 }

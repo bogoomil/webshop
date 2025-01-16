@@ -11,6 +11,8 @@ import { CartComponent } from "./menu/cart/cart.component";
 import ShopService from './shared/service/shop.service';
 import { Shop } from './shared/interfaces/shop.interface';
 import { selectShop } from './shared/store/shop.selectors';
+import { User } from './shared/interfaces/user.interface';
+import { loginUser } from './user/store/user.actions';
 
 
 @Component({
@@ -37,8 +39,11 @@ export class AppComponent extends BaseComponent implements OnInit{
     console.log('INIT APP COMPONENT');
     let jwtToken = sessionStorage.getItem('jwtToken');
     if (jwtToken) {
+      let user: User = JSON.parse('' + sessionStorage.getItem('currentUser'));
       this.store.dispatch(login());
+      this.store.dispatch(loginUser({jwtToken: jwtToken, user: user}));
     }
+
     this.store.select(selectShop).subscribe(shop => {
       if(shop.serviceAreas.length == 0){
         this.shopService.loadShop();

@@ -12,6 +12,7 @@ import { tokenInterceptor } from './interceptors/token.interceptor';
 import { authstoreReducer } from './user/store/authstore.reducer';
 import { cartReducer } from './menu/store/product.reducer';
 import { shopReducer } from './shared/store/shop.reducer';
+import { userReducer } from './user/store/user.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -20,7 +21,8 @@ export const appConfig: ApplicationConfig = {
   provideStore({
     loggedIn: authstoreReducer,
     cart: cartReducer,
-    shop: shopReducer
+    shop: shopReducer,
+    user: userReducer
   }),
   provideStoreDevtools({ maxAge: 25, logOnly: false }),
   provideHttpClient(withInterceptors([baseurlInterceptor, tokenInterceptor, errorInterceptor]),),],

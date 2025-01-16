@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
 import { ServiceArea, Shop } from '../shared/interfaces/shop.interface';
 import { selectServiceAreas } from '../shared/store/shop.selectors';
 import UserService from '../user/services/user.service';
-import { User } from '../shared/interfaces/auth.interface';
+import { User } from '../shared/interfaces/user.interface';
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',

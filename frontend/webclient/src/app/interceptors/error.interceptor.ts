@@ -2,9 +2,11 @@ import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpRequest } from "@angul
 import { catchError, EMPTY, Observable } from "rxjs";
 import AuthService from "../user/services/auth.service";
 import { inject } from "@angular/core";
+import UserService from "../user/services/user.service";
 
 export function errorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
     const authService = inject(AuthService);
+    const userService = inject(UserService);
     return next(req).pipe(
         catchError((error: HttpErrorResponse) => {
             console.log('error: ' + error.status);

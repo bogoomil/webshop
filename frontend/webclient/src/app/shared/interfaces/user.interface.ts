@@ -4,6 +4,11 @@ export interface Authentication {
     jwtToken: string;
 }
 
+export interface LoggedInUserData {
+    jwtToken: string | null;
+    user: User | null;
+}
+
 export interface TokenPayload {
     roles: Role[];
     sub: string;

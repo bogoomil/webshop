@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Authentication, User, UserForm } from '../interfaces/auth.interface';
+import { Authentication, User, UserForm } from '../interfaces/user.interface';
 import { Item, Kategoria } from '../interfaces/menu.interface';
 import { Shop } from '../interfaces/shop.interface';
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { login } from './user/store/authstore.actions';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +12,6 @@ import { Shop } from './shared/interfaces/shop.interface';
 import { selectShop } from './shared/store/shop.selectors';
 import { User } from './shared/interfaces/user.interface';
 import { loginUser } from './user/store/user.actions';
-
 
 @Component({
   selector: 'app-root',
@@ -40,7 +38,6 @@ export class AppComponent extends BaseComponent implements OnInit{
     let jwtToken = sessionStorage.getItem('jwtToken');
     if (jwtToken) {
       let user: User = JSON.parse('' + sessionStorage.getItem('currentUser'));
-      this.store.dispatch(login());
       this.store.dispatch(loginUser({jwtToken: jwtToken, user: user}));
     }
 

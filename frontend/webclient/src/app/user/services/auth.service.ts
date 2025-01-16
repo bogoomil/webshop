@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { login, logout } from '../store/authstore.actions';
 import ApiService from '../../shared/service/api.service';
 import { TokenPayload } from '../../shared/interfaces/user.interface';
 import { loginUser, logoutUser } from '../store/user.actions';
@@ -16,14 +15,12 @@ export default class AuthService{
       sessionStorage.setItem('jwtToken', jwtResponse.jwtToken);
       this.api.loadUser(username).subscribe(userResponse => {
         sessionStorage.setItem('currentUser', JSON.stringify(userResponse));
-        this.store.dispatch(login());
         this.store.dispatch(loginUser({jwtToken: jwtResponse.jwtToken, user: userResponse}))
       })
     });
   }
 
   logout(){
-    this.store.dispatch(logout());
     this.store.dispatch(logoutUser());
     sessionStorage.removeItem('jwtToken');
     sessionStorage.removeItem('currentUser');

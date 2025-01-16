@@ -19,7 +19,7 @@ import { UserUpdateComponent } from "./components/userdata/user-update.component
 })
 export class MyaccountComponent extends BaseComponent{
   constructor(
-    store: Store<{ loggedIn: boolean }>,
+    store: Store,
     authservice: AuthService
   ) {
     super(store, authservice)

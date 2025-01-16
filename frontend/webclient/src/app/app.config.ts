@@ -9,7 +9,6 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { baseurlInterceptor } from './interceptors/baseurl.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { tokenInterceptor } from './interceptors/token.interceptor';
-import { authstoreReducer } from './user/store/authstore.reducer';
 import { cartReducer } from './menu/store/product.reducer';
 import { shopReducer } from './shared/store/shop.reducer';
 import { userReducer } from './user/store/user.reducer';
@@ -19,7 +18,6 @@ export const appConfig: ApplicationConfig = {
   provideRouter(routes),
   provideAnimationsAsync(),
   provideStore({
-    loggedIn: authstoreReducer,
     cart: cartReducer,
     shop: shopReducer,
     user: userReducer

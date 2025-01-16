@@ -1,6 +1,6 @@
 // product.action.ts
 import { createAction, props } from "@ngrx/store";
-import { CartItem } from "../../shared/menu.interface";
+import { CartItem } from "../../shared/interfaces/menu.interface";
 
 export const getCart = createAction(
     '[Cart] Get Cart Items',

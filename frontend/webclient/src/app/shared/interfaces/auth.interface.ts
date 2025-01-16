@@ -1,7 +1,7 @@
 import { FormControl, FormGroup } from "@angular/forms";
 
 export interface Authentication {
-    jwttoken: string;
+    jwtToken: string;
 }
 
 export interface TokenPayload {

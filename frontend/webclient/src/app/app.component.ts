@@ -8,6 +8,9 @@ import BaseComponent from './shared/base.component';
 import AuthService from './user/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { CartComponent } from "./menu/cart/cart.component";
+import ShopService from './shared/service/shop.service';
+import { Shop } from './shared/interfaces/shop.interface';
+import { selectShop } from './shared/store/shop.selectors';
 
 
 @Component({
@@ -22,8 +25,10 @@ export class AppComponent extends BaseComponent implements OnInit{
   activeLink = '';
 
    constructor(
-     store: Store<{ loggedIn: boolean }>,
-     authservice: AuthService
+     store: Store<{ loggedIn: boolean, shop: Shop }>,
+     authservice: AuthService,
+     private shopService: ShopService,
+     
    ) {
      super(store, authservice)
    }
@@ -34,5 +39,10 @@ export class AppComponent extends BaseComponent implements OnInit{
     if (jwtToken) {
       this.store.dispatch(login());
     }
+    this.store.select(selectShop).subscribe(shop => {
+      if(shop.serviceAreas.length == 0){
+        this.shopService.loadShop();
+      }
+    });
   }
 }

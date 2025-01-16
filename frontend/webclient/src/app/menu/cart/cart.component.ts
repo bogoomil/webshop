@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Cart, CartItem } from '../../shared/menu.interface';
+import { Cart, CartItem } from '../../shared/interfaces/menu.interface';
 import { MatIconModule } from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge'
 import { CommonModule } from '@angular/common';

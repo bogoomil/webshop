@@ -1,9 +1,55 @@
-<div *ngFor="let item of (order$ | async)?.items">{{item.name}} count: {{item.count}}
-<button mat-mini-fab (click)="addToCart(item)">
-    <mat-icon>add_shopping_cart</mat-icon>
-</button>
-<button mat-mini-fab (click)="removeFromCart(item)">
-    <mat-icon>remove_shopping_cart</mat-icon>
-</button>
-</div>
-<div>summa: {{sum$ | async}}</div>
+<table class="order-table">
+    <tr>
+        <td>Név</td>
+        <td>Ár</td>
+        <td>Csomagolási díj</td>
+        <td>Mennyiség</td>
+        <td>Összeg</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr *ngFor="let item of (order$ | async)?.items">
+        <td>{{item.name}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.packagingFee}}</td>
+        <td>{{item.count}}</td>
+        <td>{{item.count * (item.packagingFee + item.price)}}</td>
+        <td>
+            <button mat-mini-fab (click)="addToCart(item)">
+                <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+        </td>
+        <td>
+            <button mat-mini-fab (click)="removeFromCart(item)">
+                <mat-icon>remove_shopping_cart</mat-icon>
+            </button>    
+        </td>
+    </tr>         
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Összesen</td>
+        <td>{{sum$ | async}}</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Szállítás</td>
+        <td>xxx</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Totál</td>
+        <td>xxx</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>

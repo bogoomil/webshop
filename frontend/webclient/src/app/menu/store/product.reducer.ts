@@ -1,6 +1,6 @@
 // product.reducer.ts
 import { createReducer, on } from '@ngrx/store';
-import { Cart, CartItem } from '../../shared/menu.interface';
+import { Cart, CartItem } from '../../shared/interfaces/menu.interface';
 import * as PostsActions from './product.actions';
 
 export const initialState: Cart = {
@@ -18,8 +18,7 @@ export const cartReducer = createReducer(
   on(PostsActions.postCart, (state, action) => {
     state = {
       ...state,
-      products: [...state.products, action.cartItem],
-      error: ': ' + state.products.length
+      products: [...state.products, action.cartItem]
     }
     console.log('POST CART');
     return state;

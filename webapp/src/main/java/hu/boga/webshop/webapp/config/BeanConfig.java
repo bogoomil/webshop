@@ -2,6 +2,8 @@ package hu.boga.webshop.webapp.config;
 
 import hu.boga.webshop.core.menu.gateway.MenuGateway;
 import hu.boga.webshop.core.menu.interactor.MenuInteractor;
+import hu.boga.webshop.core.shop.gateway.ShopGateway;
+import hu.boga.webshop.core.shop.interactor.ShopInteractor;
 import hu.boga.webshop.core.user.gateway.UserGateway;
 import hu.boga.webshop.core.user.interactor.UserInteractor;
 import hu.boga.webshop.persistence.repos.KategoriaRepository;
@@ -32,6 +34,11 @@ public class BeanConfig {
   @Bean
   MenuInteractor getMenuInteractor(@Autowired MenuGateway menuGateway){
     return new MenuInteractor(menuGateway);
+  }
+
+  @Bean
+  ShopInteractor getShopInteractor(@Autowired ShopGateway shopGateway){
+    return new ShopInteractor(shopGateway);
   }
 
   @Bean

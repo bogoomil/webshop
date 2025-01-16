@@ -6,8 +6,7 @@ import { Store } from '@ngrx/store';
 import AuthService from './services/auth.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-// import { UserCreateComponent } from "./components/userdata/user-create.component";
-import BaseComponent from '../shared/base.component';
+import BaseComponent from '../../app/shared/base.component';
 import { UserCreateComponent } from "./components/userdata/user-create.component";
 import { UserUpdateComponent } from "./components/userdata/user-update.component";
 

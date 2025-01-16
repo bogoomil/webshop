@@ -1,9 +1,9 @@
-import { GroupedCartResult } from './../shared/menu.interface';
+import { GroupedCartResult } from './../shared/interfaces/menu.interface';
 
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Cart, CartItem } from '../shared/menu.interface';
+import { Observable, forkJoin } from 'rxjs';
+import { Cart, CartItem } from '../shared/interfaces/menu.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge'
 import { CommonModule } from '@angular/common';
@@ -12,7 +12,10 @@ import * as CartActions from '../menu/store/product.actions';
 import { MatButtonModule } from '@angular/material/button';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { ServiceArea, Shop } from '../shared/interfaces/shop.interface';
+import { selectServiceAreas } from '../shared/store/shop.selectors';
+import UserService from '../user/services/user.service';
+import { User } from '../shared/interfaces/auth.interface';
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
@@ -24,13 +27,25 @@ export class ShoppingcartComponent {
 
   order$: Observable<GroupedCartResult>;
   sum$: Observable<number> = of(0);
+  serviceAreas$: Observable<ServiceArea[]>;
+ // transitCost$: Observable<number>;
 
 
-  constructor(private store: Store<Cart>) {
+
+  constructor(private store: Store<{cart: Cart, shop: Shop}>, userService: UserService) {
     this.order$ = this.groupCartItems(this.store.select(selectItems));
+    this.serviceAreas$ = this.store.select(selectServiceAreas);
     this.order$.subscribe(result => {
       this.sum$ = of(this.getSum(result));
     });
+    this.getTransitCost(this.serviceAreas$, userService.currentUser());
+  }
+
+  getTransitCost(sas: Observable<ServiceArea[]>, user: Observable<User>) {
+    forkJoin([sas, user]).subscribe(result => {
+      console.log(result);
+    });
+
   }
 
   getSum(groupedResult: GroupedCartResult): number {

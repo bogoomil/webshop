@@ -6,11 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 public class JwtResponse implements Serializable {
-    private final String jwttoken;
+    private final String jwtToken;
     private final UserDetails userDetails;
 
-    public JwtResponse(String jwttoken, UserDetails userDetails) {
-        this.jwttoken = jwttoken;
+    public JwtResponse(String jwtToken, UserDetails userDetails) {
+        this.jwtToken = jwtToken;
         this.userDetails = userDetails;
     }
 

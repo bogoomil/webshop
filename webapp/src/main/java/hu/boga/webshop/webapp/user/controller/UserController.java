@@ -47,7 +47,6 @@ public class UserController {
   private User getUserFromSignupForm(UserForm userForm) {
     return User.builder()
         .email(userForm.getEmail())
-        .username(userForm.getUsername())
         .firstName(userForm.getFirstName())
         .lastName(userForm.getLastName())
         .addresses(getAddresses(userForm))
@@ -85,7 +84,7 @@ public class UserController {
   }
 
   @GetMapping("/private/user/{email}")
-  @PreAuthorize("hasAnyRole('ROLE_USER')")
+  @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
   public UserForm getUserByEmail(@PathVariable String email) {
     return userInteractor.findByEmail(email).map(user -> convertUserToUserForm(user)).orElseThrow(() -> new CoreException("user not found"));
   }

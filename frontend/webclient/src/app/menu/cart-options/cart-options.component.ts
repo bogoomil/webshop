@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Cart, Item } from '../../shared/menu.interface';
+import { Cart, Item } from '../../shared/interfaces/menu.interface';
 import { Store, select } from '@ngrx/store';
 import * as CartActions from '../store/product.actions';
 import { ActivatedRoute } from '@angular/router';

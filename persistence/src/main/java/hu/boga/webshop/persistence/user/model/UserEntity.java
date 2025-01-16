@@ -35,9 +35,6 @@ public class UserEntity {
   @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
   private Collection<AddressEntity> addressEntities = new ArrayList<>();
 
-  @Column(name = "username")
-  private String username;
-
   @Column(name = "email")
   private String email;
 

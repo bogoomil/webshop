@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { login, logout } from '../store/authstore.actions';
-import ApiService from './api.service';
-import { TokenPayload } from '../../shared/auth.interface';
+import ApiService from '../../shared/service/api.service';
+import { TokenPayload } from '../../shared/interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +11,9 @@ export default class AuthService{
   constructor(private store: Store, private api: ApiService) {} 
     
   login(username: string, password: string){
+    debugger
     this.api.authenticate(username, password).subscribe(response => {
-      sessionStorage.setItem('jwtToken', response.jwttoken);
+      sessionStorage.setItem('jwtToken', response.jwtToken);
       this.api.loadUser(username).subscribe(response => {
         sessionStorage.setItem('currentUser', JSON.stringify(response));
         this.store.dispatch(login());

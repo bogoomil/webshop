@@ -28,7 +28,7 @@ public class TetelEntity {
   private Long id;
 
   @Lob
-  @Column(name = "image", nullable = false, length = 100000)
+  @Column(name = "image", nullable = true, length = 100000)
   private String image;
 
   @ManyToOne

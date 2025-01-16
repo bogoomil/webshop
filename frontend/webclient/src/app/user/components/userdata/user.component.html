@@ -47,12 +47,24 @@
             <mat-label>Név a címen</mat-label>
             <input matInput formControlName="addressName" name="city">
           </mat-form-field>
+
           <mat-form-field>
+            <mat-label>Irányítószám</mat-label>
+            <mat-select formControlName="zip">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let sa of (serviceAreas$ | async)" [value]="sa.zip">{{sa.zip}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registerForm.controls.shippingAddress.controls.zip.errors?.['required']">Irányítószám kötelező
+              kötelező</mat-error>
+          </mat-form-field>
+
+          <!-- <mat-form-field>
             <mat-label>Irányítószám</mat-label>
             <input matInput formControlName="zip" name="zip">
             <mat-error *ngIf="registerForm.controls.shippingAddress.controls.zip.errors?.['required']">Város
               kötelező</mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
+
           <mat-form-field>
             <mat-label>Közterület (utca, tér, stb.)</mat-label>
             <input matInput formControlName="street" name="street">

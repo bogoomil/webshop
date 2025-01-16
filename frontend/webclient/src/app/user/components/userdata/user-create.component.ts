@@ -2,33 +2,34 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AddressForm, User, UserForm } from '../../../shared/auth.interface';
+import { AddressForm, User, UserForm } from '../../../shared/interfaces/auth.interface';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { merge } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';  
+import { FlexLayoutModule } from '@angular/flex-layout';
 import UserService from '../../services/user.service';
+import { Store } from '@ngrx/store';
+import UserBaseComponent from './user-base.component';
+import { Shop } from '../../../shared/interfaces/shop.interface';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-user-create',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
   standalone: true,
-  imports: [FlexLayoutModule, FormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule]
+  imports: [MatSelectModule, FlexLayoutModule, FormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule]
 })
-export class UserCreateComponent {
-
-  constructor(private userService: UserService){}
-
-  hide = signal(true);
-
+export class UserCreateComponent extends UserBaseComponent {
   create = true;
-
   buttonLabel = 'Regisztráció';
-  
+
+  constructor(userService: UserService, store: Store<Shop>) {
+    super(userService, store);
+
+  }
+
   registerForm = new FormGroup<UserForm>({
     lastName: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
@@ -61,15 +62,9 @@ export class UserCreateComponent {
     })
   });
 
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
-
   submit() {
     console.log('user: ' + JSON.stringify(this.registerForm.getRawValue()));
     this.userService.signup(this.registerForm.getRawValue());
   }
-
 
 }

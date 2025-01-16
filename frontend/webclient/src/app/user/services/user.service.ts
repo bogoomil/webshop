@@ -1,8 +1,9 @@
-import { User, UserForm } from '../../shared/auth.interface';
+import { User, UserForm } from '../../shared/interfaces/auth.interface';
 import { Injectable, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import ApiService from './api.service';
+import ApiService from '../../shared/service/api.service';
 import AuthService from './auth.service';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,10 @@ export default class UserService{
       sessionStorage.setItem('currentUser', JSON.stringify(response));
       alert('Mentés sikeres.')
     });
+  }
+
+  currentUser(): Observable<User>{
+    return of(this.loadCurrentUser());
   }
 
   loadCurrentUser() : User{

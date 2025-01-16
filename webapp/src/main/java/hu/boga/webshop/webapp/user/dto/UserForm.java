@@ -19,8 +19,6 @@ public class UserForm {
   @NotNull(message = "email address must not be null")
   private String email;
 
-  private String username;
-
   private String firstName;
 
   private String lastName;

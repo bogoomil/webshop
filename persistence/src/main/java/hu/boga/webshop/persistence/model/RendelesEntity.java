@@ -7,6 +7,7 @@ package hu.boga.webshop.persistence.model;
 
 import hu.boga.webshop.core.user.model.enums.OrderStatus;
 import hu.boga.webshop.core.user.model.enums.PaymentMethodType;
+import hu.boga.webshop.persistence.shop.model.ShopEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import MenuService from './service/menu.service';
-import { Item, Kategoria } from '../shared/menu.interface';
+import { Item, Kategoria } from '../shared/interfaces/menu.interface';
 import { MatButtonModule } from '@angular/material/button';
 import { ItemComponent } from "./item.component";
 import { FlexLayoutModule } from '@angular/flex-layout';

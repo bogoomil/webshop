@@ -1,13 +1,11 @@
-package hu.boga.webshop.core.shop.model;
+package hu.boga.webshop.webapp.shop.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 import lombok.Data;
 
-
 @Data
-public class Shop {
-
+public class ShopDto {
   private Boolean alwaysOpen = Boolean.FALSE;
 
   private Integer closeHourFri;
@@ -76,7 +74,8 @@ public class Shop {
 
   private String receiptHeader;
 
-  private List<ServiceArea> serviceAreas;
+  private List<ServiceAreaDto> serviceAreas;
 
   private LocalDate closedUntil;
+
 }

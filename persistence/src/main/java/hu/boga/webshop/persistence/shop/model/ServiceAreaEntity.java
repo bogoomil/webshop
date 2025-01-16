@@ -1,4 +1,4 @@
-package hu.boga.webshop.persistence.model;
+package hu.boga.webshop.persistence.shop.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package hu.boga.webshop.persistence.model;
+package hu.boga.webshop.persistence.shop.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -118,21 +118,6 @@ public class ShopEntity {
 
   @Column
   private Integer openMinWed;
-
-  @Column
-  private Boolean otpBankCardEnabled = Boolean.FALSE;
-
-  @Column
-  private String otpPosId;
-
-  @Column
-  private Boolean otpSzepCardEnabled = Boolean.FALSE;
-
-  @Column
-  private String otpSzepPocketId;
-
-  @Column
-  private String otpSzepPosId;
 
   @Column(length = 2048)
   private String receiptFooter;

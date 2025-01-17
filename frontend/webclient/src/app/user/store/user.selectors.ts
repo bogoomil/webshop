@@ -1,22 +1,27 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { LoggedInUserData, User } from '../../shared/interfaces/user.interface';
 
-export const selectStoreState = createFeatureSelector<LoggedInUserData>('user');
+export const selectUserState = createFeatureSelector<LoggedInUserData>('user');
 
 export const selectUser = createSelector(
-    selectStoreState,
+    selectUserState,
     (state) => state.user
 );
 
+export const selectLoggedInUsersZip = createSelector(
+    selectUserState,
+    (state) => state.user?.shippingAddress.zip 
+)
+
 export const selectJwtToken = createSelector(
-    selectStoreState,
+    selectUserState,
     (state) => state.jwtToken
 );
 
 export const selectLoggedIn = createSelector(
-    selectStoreState,
+    selectUserState,
     (state) => state.jwtToken != null
 )
 
 
-export const hasSuchRole = (role: string) => createSelector(selectStoreState, (items) => (items.user && items.user.roles) ? items.user.roles.includes(role) : false);
+export const hasSuchRole = (role: string) => createSelector(selectUserState, (items) => (items.user && items.user.roles) ? items.user.roles.includes(role) : false);

@@ -2,7 +2,7 @@ import { GroupedCartResult } from './../shared/interfaces/menu.interface';
 
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, combineLatest, forkJoin } from 'rxjs';
 import { Cart, CartItem } from '../shared/interfaces/menu.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge'
@@ -16,6 +16,7 @@ import { ServiceArea, Shop } from '../shared/interfaces/shop.interface';
 import { selectServiceAreas } from '../shared/store/shop.selectors';
 import UserService from '../user/services/user.service';
 import { User } from '../shared/interfaces/user.interface';
+import {selectLoggedInUsersZip} from '../user/store/user.selectors';
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
@@ -28,24 +29,32 @@ export class ShoppingcartComponent {
   order$: Observable<GroupedCartResult>;
   sum$: Observable<number> = of(0);
   serviceAreas$: Observable<ServiceArea[]>;
- // transitCost$: Observable<number>;
+  transitCost$: Observable<number | undefined>;
 
 
 
-  constructor(private store: Store<{cart: Cart, shop: Shop}>, userService: UserService) {
+  constructor(private store: Store, userService: UserService) {
     this.order$ = this.groupCartItems(this.store.select(selectItems));
     this.serviceAreas$ = this.store.select(selectServiceAreas);
     this.order$.subscribe(result => {
       this.sum$ = of(this.getSum(result));
     });
-    this.getTransitCost(this.serviceAreas$, userService.currentUser());
+    this.transitCost$ = this.getTransitCostByZip(this.serviceAreas$, this.store.select(selectLoggedInUsersZip));
   }
 
-  getTransitCost(sas: Observable<ServiceArea[]>, user: Observable<User>) {
-    forkJoin([sas, user]).subscribe(result => {
-      console.log(result);
-    });
-
+  getTransitCostByZip(
+    serviceAreas$: Observable<ServiceArea[]>,
+    zip$: Observable<string | undefined>
+  ): Observable<number | undefined> {
+    return combineLatest([serviceAreas$, zip$]).pipe(
+      map(([serviceAreas, zip]) => {
+        if (zip === undefined) {
+          return undefined; // Handle undefined ID explicitly
+        }
+        const item = serviceAreas.find((item) => item.zip === zip);
+        return item ? item.transitCost : undefined; // Returns undefined if no match is found
+      })
+    );
   }
 
   getSum(groupedResult: GroupedCartResult): number {

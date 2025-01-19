@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -27,44 +27,43 @@ export class UserCreateComponent extends UserBaseComponent {
 
   constructor(userService: UserService, store: Store<Shop>) {
     super(userService, store);
-
+    this.registerForm = new FormGroup<UserForm>({
+      lastName: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      username: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+      phone1: new FormControl('', Validators.required),
+      phone1Extension: new FormControl(''),
+      roles: new FormControl(null),
+      shippingAddress: new FormGroup<AddressForm>({
+        addressName: new FormControl(''),
+        city: new FormControl(''),
+        country: new FormControl(''),
+        door: new FormControl(''),
+        floor: new FormControl(''),
+        number: new FormControl('', Validators.required),
+        street: new FormControl('', Validators.required),
+        street2: new FormControl(''),
+        zip: new FormControl('', Validators.required)
+      }),
+      billingAddress: new FormGroup<AddressForm>({
+        addressName: new FormControl(''),
+        city: new FormControl(''),
+        country: new FormControl(''),
+        door: new FormControl(''),
+        floor: new FormControl(''),
+        number: new FormControl(''),
+        street: new FormControl(''),
+        street2: new FormControl(''),
+        zip: new FormControl('')
+      })
+    });
+  
   }
 
-  registerForm = new FormGroup<UserForm>({
-    lastName: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    username: new FormControl(''),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    phone1: new FormControl('', Validators.required),
-    phone1Extension: new FormControl(''),
-    roles: new FormControl(null),
-    shippingAddress: new FormGroup<AddressForm>({
-      addressName: new FormControl(''),
-      city: new FormControl(''),
-      country: new FormControl(''),
-      door: new FormControl(''),
-      floor: new FormControl(''),
-      number: new FormControl('', Validators.required),
-      street: new FormControl('', Validators.required),
-      street2: new FormControl(''),
-      zip: new FormControl('', Validators.required)
-    }),
-    billingAddress: new FormGroup<AddressForm>({
-      addressName: new FormControl(''),
-      city: new FormControl(''),
-      country: new FormControl(''),
-      door: new FormControl(''),
-      floor: new FormControl(''),
-      number: new FormControl(''),
-      street: new FormControl(''),
-      street2: new FormControl(''),
-      zip: new FormControl('')
-    })
-  });
 
   submit() {
-    console.log('user: ' + JSON.stringify(this.registerForm.getRawValue()));
     this.userService.signup(this.registerForm.getRawValue());
   }
 

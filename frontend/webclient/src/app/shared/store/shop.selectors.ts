@@ -13,4 +13,4 @@ export const selectServiceAreas = createSelector(
     (state) => state.serviceAreas
 );
 
-export const hasSuchRole = (zip: string) => createSelector(selectShopState, (items) => items.serviceAreas.find((sa) => sa.zip == zip));
+export const getServiceAreaByZip = (zip: string) => createSelector(selectShopState, (items) => items.serviceAreas.find((sa) => sa.zip == zip));

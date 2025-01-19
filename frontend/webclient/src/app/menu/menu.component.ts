@@ -17,7 +17,7 @@ import { inject } from '@angular/core';
   styleUrl: './menu.component.scss',
   standalone: true
 })
-export class MenuComponent implements OnInit{
+export class MenuComponent implements OnInit {
 
   kats?: Kategoria[];
   items?: Item[];
@@ -25,32 +25,30 @@ export class MenuComponent implements OnInit{
 
   private readonly route = inject(ActivatedRoute);
 
-  constructor(private menuService: MenuService){
+  constructor(private menuService: MenuService) {
     const kategoriak$ = this.menuService.loadAllCategories().subscribe(resp => {
       this.kats = resp;
-    });  
-  }
-
-  loadItems(categoryName: string){
-    this.currentCategory = decodeURIComponent(categoryName);
-    this.menuService.loadItems(categoryName).subscribe(resp => {
-      this.items = resp;
     });
   }
 
-  enc(s: string): string{
+  enc(s: string): string {
     return encodeURIComponent(s);
   }
 
   ngOnInit() {
     this.route.url.subscribe(m => {
-    const categoryName = this.route.snapshot.paramMap.get('category');
-    if(categoryName){
-      console.log('on init category: ' + categoryName);
-      this.loadItems('' + categoryName);  
-    }
-  }) 
+      const categoryName = this.route.snapshot.paramMap.get('category');
+      if (categoryName) {
+        console.log('on init category: ' + categoryName);
+        this.loadItems('' + categoryName);
+      }
+    })
   }
-  
 
+  loadItems(categoryName: string) {
+    this.currentCategory = decodeURIComponent(categoryName);
+    this.menuService.loadItems(categoryName).subscribe(resp => {
+      this.items = resp;
+    });
+  }
 }

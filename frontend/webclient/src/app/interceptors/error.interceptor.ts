@@ -6,13 +6,11 @@ import UserService from "../user/services/user.service";
 
 export function errorInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
     const authService = inject(AuthService);
-    const userService = inject(UserService);
     return next(req).pipe(
         catchError((error: HttpErrorResponse) => {
             console.log('error: ' + error.status);
             if(error.status === 401){
                 console.log('removing jwt token')
-                sessionStorage.removeItem('jwtToken');
                 authService.logout();
             }
             if (error.error instanceof Error) {

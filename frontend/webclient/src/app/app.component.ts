@@ -25,7 +25,7 @@ export class AppComponent extends BaseComponent implements OnInit{
   activeLink = '';
 
    constructor(
-     store: Store<{ loggedIn: boolean, shop: Shop }>,
+     store: Store,
      authservice: AuthService,
      private shopService: ShopService,
      
@@ -34,13 +34,6 @@ export class AppComponent extends BaseComponent implements OnInit{
    }
  
   ngOnInit(): void {
-    console.log('INIT APP COMPONENT');
-    let jwtToken = sessionStorage.getItem('jwtToken');
-    if (jwtToken) {
-      let user: User = JSON.parse('' + sessionStorage.getItem('currentUser'));
-      this.store.dispatch(loginUser({jwtToken: jwtToken, user: user}));
-    }
-
     this.store.select(selectShop).subscribe(shop => {
       if(shop.serviceAreas.length == 0){
         this.shopService.loadShop();

@@ -11,7 +11,7 @@ export const selectUser = createSelector(
 export const selectLoggedInUsersZip = createSelector(
     selectUserState,
     (state) => state.user?.shippingAddress.zip 
-)
+);
 
 export const selectJwtToken = createSelector(
     selectUserState,
@@ -21,7 +21,7 @@ export const selectJwtToken = createSelector(
 export const selectLoggedIn = createSelector(
     selectUserState,
     (state) => state.jwtToken != null
-)
+);
 
 
 export const hasSuchRole = (role: string) => createSelector(selectUserState, (items) => (items.user && items.user.roles) ? items.user.roles.includes(role) : false);

@@ -1,5 +1,5 @@
 import { Store } from '@ngrx/store';
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,17 +13,20 @@ import UserService from '../../services/user.service';
 import UserBaseComponent from './user-base.component';
 import { MatSelectModule } from '@angular/material/select';
 import { selectUser } from '../../store/user.selectors';
+import { updateUser } from '../../store/user.actions';
 
 @Component({
-  selector: 'app-user-update',
+  selector: 'app-user-data',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
   standalone: true,
   imports: [MatSelectModule, FlexLayoutModule, FormsModule, CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule]
 })
 export class UserUpdateComponent extends UserBaseComponent{
-  buttonLabel = 'Mentés';
+  buttonLabel = 'Megrendelés';
   create = false;
+
+  @Output() dataEmitter = new EventEmitter<{ user: User }>();
 
   constructor(userService: UserService, store: Store) {
     super(userService, store);
@@ -33,7 +36,7 @@ export class UserUpdateComponent extends UserBaseComponent{
         lastName: new FormControl(user?.lastName, Validators.required),
         firstName: new FormControl(user?.firstName, Validators.required),
         username: new FormControl(user?.username),
-        email: new FormControl({ value: user?.email, disabled: true }, [Validators.required, Validators.email]),
+        email: new FormControl({ value: user?.email, disabled: false }, [Validators.required, Validators.email]),
         password: new FormControl(user?.password),
         phone1: new FormControl(user?.phone1, Validators.required),
         phone1Extension: new FormControl(user?.phone1Extension),
@@ -66,7 +69,7 @@ export class UserUpdateComponent extends UserBaseComponent{
   }
 
   submit() {
-    this.userService.updateUser(this.registerForm.getRawValue());
+    this.dataEmitter.emit({user: this.registerForm.getRawValue()});
   }
 
 }

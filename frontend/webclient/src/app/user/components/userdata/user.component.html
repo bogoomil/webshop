@@ -5,23 +5,23 @@
         <h4>Személyes adatok</h4>
         <mat-form-field>
           <mat-label>Vezetéknév</mat-label>
-          <input matInput formControlName="lastName" name="lastName">
+          <input matInput formControlName="lastName" name="lastName" (blur)="updateStore()">
           <mat-error *ngIf="registerForm.controls.lastName.errors?.['required']">Vezetéknév kötelező</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Keresztnév</mat-label>
-          <input matInput formControlName="firstName" name="firstName">
+          <input matInput formControlName="firstName" name="firstName" (blur)="updateStore()">
           <mat-error *ngIf="registerForm.controls.firstName.errors?.['required']">Keresztnév kötelező</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" name="email">
+          <input matInput formControlName="email" name="email" (blur)="updateStore()">
           <mat-error *ngIf="registerForm.controls.email.errors?.['required']">Email kötelező</mat-error>
           <mat-error *ngIf="registerForm.controls.email.errors?.['email']">Email formátuma nem megfelelő</mat-error>
         </mat-form-field>
         <mat-form-field *ngIf="create">
           <mat-label>Password</mat-label>
-          <input matInput formControlName="password" [type]="hide() ? 'password' : 'text'" />
+          <input matInput formControlName="password" [type]="hide() ? 'password' : 'text'"  (blur)="updateStore()"/>
           <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide()">
             <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -30,12 +30,12 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Telefonszám</mat-label>
-          <input matInput formControlName="phone1" name="phone1">
+          <input matInput formControlName="phone1" name="phone1" (blur)="updateStore()">
           <mat-error *ngIf="registerForm.controls.phone1.errors?.['required']">Telefonszám kötelező</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Mellék</mat-label>
-          <input matInput formControlName="phone1Extension" name="phone1Extension">
+          <input matInput formControlName="phone1Extension" name="phone1Extension" (blur)="updateStore()">
         </mat-form-field>
       </div>
     </div>
@@ -45,12 +45,12 @@
         <ng-container formGroupName="shippingAddress">
           <mat-form-field>
             <mat-label>Név a címen</mat-label>
-            <input matInput formControlName="addressName" name="city">
+            <input matInput formControlName="addressName" name="city" (blur)="updateStore()">
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Irányítószám</mat-label>
-            <mat-select formControlName="zip">
+            <mat-select formControlName="zip" (selectionChange)="updateStore()">
               <mat-option>None</mat-option>
               <mat-option *ngFor="let sa of (serviceAreas$ | async)" [value]="sa.zip">{{sa.zip}}</mat-option>
             </mat-select>
@@ -67,25 +67,25 @@
 
           <mat-form-field>
             <mat-label>Közterület (utca, tér, stb.)</mat-label>
-            <input matInput formControlName="street" name="street">
+            <input matInput formControlName="street" name="street" (blur)="updateStore()">
             <mat-error *ngIf="registerForm.controls.shippingAddress.controls.street.errors?.['required']">Közterület
               kötelező</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Közterület (utca, tér, stb.) 2</mat-label>
-            <input matInput formControlName="street2" name="street2">
+            <input matInput formControlName="street2" name="street2" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Házszám</mat-label>
-            <input matInput formControlName="number" name="number">
+            <input matInput formControlName="number" name="number" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Emelet</mat-label>
-            <input matInput formControlName="floor" name="floor">
+            <input matInput formControlName="floor" name="floor" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Ajtó</mat-label>
-            <input matInput formControlName="door" name="door">
+            <input matInput formControlName="door" name="door" (blur)="updateStore()">
           </mat-form-field>
         </ng-container>
       </div>
@@ -96,31 +96,31 @@
         <ng-container formGroupName="billingAddress">
           <mat-form-field>
             <mat-label>Név a címen</mat-label>
-            <input matInput formControlName="addressName" name="city">
+            <input matInput formControlName="addressName" name="city" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Irányítószám</mat-label>
-            <input matInput formControlName="zip" name="zip">
+            <input matInput formControlName="zip" name="zip" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Közterület (utca, tér, stb.)</mat-label>
-            <input matInput formControlName="street" name="street">
+            <input matInput formControlName="street" name="street" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Közterület (utca, tér, stb.) 2</mat-label>
-            <input matInput formControlName="street2" name="street2">
+            <input matInput formControlName="street2" name="street2" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Házszám</mat-label>
-            <input matInput formControlName="number" name="number">
+            <input matInput formControlName="number" name="number" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Emelet</mat-label>
-            <input matInput formControlName="floor" name="floor">
+            <input matInput formControlName="floor" name="floor" (blur)="updateStore()">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Ajtó</mat-label>
-            <input matInput formControlName="door" name="door">
+            <input matInput formControlName="door" name="door" (blur)="updateStore()">
           </mat-form-field>
         </ng-container>
       </div>

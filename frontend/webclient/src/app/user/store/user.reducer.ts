@@ -14,10 +14,18 @@ export const userReducer = createReducer(
         ...state,
     })),
 
-    on(UserActions.loginUser, (state, action) => {
+    on(UserActions.setJwtToken, (state, action) => {
         state = {
             ...state,
             jwtToken: action.jwtToken,
+       }
+        return state;
+
+    }),
+
+    on(UserActions.loginUser, (state, action) => {
+        state = {
+            ...state,
             user: action.user
         }
         return state;

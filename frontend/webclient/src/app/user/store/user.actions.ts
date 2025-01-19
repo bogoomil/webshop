@@ -5,9 +5,14 @@ export const getUser = createAction(
     '[User] get user',
 )
 
+export const setJwtToken = createAction(
+    '[User] set jwt token', 
+    props<{jwtToken: string}>()
+)
+
 export const loginUser = createAction(
     '[User] Login User', 
-    props<{jwtToken: string, user: User}>()
+    props<{user: User}>()
 )
 
 export const logoutUser = createAction(
